@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "575876757976",
+    "project_id": "munchly-eac3a",
+    "storage_bucket": "munchly-eac3a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575876757976:android:e15b3354d182b3c2d89aad",
+        "android_client_info": {
+          "package_name": "com.example.comanda"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyHMgLkuXuINMKncigJA18LwRnEitxzgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
