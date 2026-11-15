@@ -1,19 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/munchly_background"
+    android:fillViewport="true"
+    android:scrollbars="none"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingStart="@dimen/spacing_large"
+        android:paddingTop="@dimen/spacing_medium"
+        android:paddingEnd="@dimen/spacing_large"
+        android:paddingBottom="@dimen/spacing_large">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Encabezado de marca: Isotipo y Logotipo Munchly -->
+        <LinearLayout
+            android:id="@+id/headerBrandLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/ivMunchlyLogo"
+                android:layout_width="@dimen/logo_size"
+                android:layout_height="@dimen/logo_size"
+                android:contentDescription="@string/cd_munchly_logo"
+                android:src="@drawable/ic_munchly_logo" />
+
+            <TextView
+                android:id="@+id/tvBrandName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.04"
+                android:text="@string/munchly_brand_name"
+                android:textColor="@color/munchly_primary"
+                android:textSize="@dimen/text_size_brand"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Tarjeta Hero de Fotografía Gastronómica Principal -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardHeroImage"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/hero_image_height"
+            android:layout_marginTop="@dimen/spacing_large"
+            app:cardBackgroundColor="@color/munchly_surface_warm"
+            app:cardCornerRadius="@dimen/corner_radius_card"
+            app:cardElevation="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerBrandLayout"
+            app:strokeColor="@color/munchly_border"
+            app:strokeWidth="1dp">
+
+            <ImageView
+                android:id="@+id/ivHeroGastronomia"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/cd_munchly_hero"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_munchly_hero_illustration" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Tagline / Insignia editorial de autor -->
+        <TextView
+            android:id="@+id/tvTagline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:background="@drawable/bg_tagline_badge"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.08"
+            android:text="@string/welcome_tagline"
+            android:textAllCaps="true"
+            android:textColor="@color/munchly_accent"
+            android:textSize="@dimen/text_size_tagline"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardHeroImage" />
+
+        <!-- Título principal editorial de bienvenida -->
+        <TextView
+            android:id="@+id/tvWelcomeTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:fontFamily="sans-serif-black"
+            android:lineSpacingMultiplier="1.15"
+            android:text="@string/welcome_title"
+            android:textColor="@color/munchly_text_primary"
+            android:textSize="@dimen/text_size_title"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTagline" />
+
+        <!-- Párrafo descriptivo -->
+        <TextView
+            android:id="@+id/tvWelcomeDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:fontFamily="sans-serif"
+            android:lineSpacingMultiplier="1.25"
+            android:text="@string/welcome_description"
+            android:textColor="@color/munchly_text_secondary"
+            android:textSize="@dimen/text_size_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvWelcomeTitle" />
+
+        <!-- Botón principal interactivo «Explorar menú» -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnExplorarMenu"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height_primary"
+            android:layout_marginTop="@dimen/spacing_xlarge"
+            android:elevation="4dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.02"
+            android:text="@string/btn_explore_menu"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_button"
+            android:textStyle="bold"
+            app:backgroundTint="@color/munchly_primary"
+            app:cornerRadius="@dimen/corner_radius_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvWelcomeDescription"
+            app:rippleColor="@color/munchly_ripple" />
+
+        <!-- Acento decorativo inferior sutil -->
+        <View
+            android:id="@+id/bottomAccentView"
+            android:layout_width="48dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:background="@drawable/bg_tagline_badge"
+            android:backgroundTint="@color/munchly_border"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnExplorarMenu" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

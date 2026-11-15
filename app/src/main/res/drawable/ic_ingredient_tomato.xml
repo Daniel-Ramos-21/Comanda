@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="28dp"
+    android:height="28dp"
+    android:viewportWidth="28"
+    android:viewportHeight="28">
+    <!-- Cuerpo del tomate -->
+    <path
+        android:fillColor="@color/munchly_accent"
+        android:pathData="M14,16m-8,0a8,7.5 0,1 1,16 0a8,7.5 0,1 1,-16 0" />
+    <!-- Hojas / sépalos verdes -->
+    <path
+        android:fillColor="#3B5336"
+        android:pathData="M14,8 L13,6 L14,7 L16,6 L15,8 L17,9 L14,9 L11,9 Z" />
+</vector>

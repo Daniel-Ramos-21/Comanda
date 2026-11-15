@@ -1,0 +1,177 @@
+<svg width="800" height="920" viewBox="0 0 800 920" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="920" fill="#F7F3EB"/>
+
+  <!-- Header -->
+  <text x="40" y="55" fill="#2E3B33" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="28" font-weight="800">Munchly • Design System</text>
+  <text x="40" y="80" fill="#79776B" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14">Tokens de diseño, componentes reutilizables y paleta oficial</text>
+
+  <!-- 1. Paleta de Colores -->
+  <text x="40" y="130" fill="#2E3B33" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="18" font-weight="700">1. Paleta de Color Principal</text>
+
+  <!-- Color Swatch 1: Beige #BFAE8F -->
+  <rect x="40" y="145" width="130" height="80" rx="12" fill="#BFAE8F"/>
+  <text x="48" y="195" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="700">Beige Primario</text>
+  <text x="48" y="212" fill="#FFFFFF" font-family="sans-serif" font-size="11">#BFAE8F</text>
+
+  <!-- Color Swatch 2: Verde Oscuro #2E3B33 -->
+  <rect x="185" y="145" width="130" height="80" rx="12" fill="#2E3B33"/>
+  <text x="193" y="195" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="700">Verde Oscuro</text>
+  <text x="193" y="212" fill="#BFAE8F" font-family="sans-serif" font-size="11">#2E3B33</text>
+
+  <!-- Color Swatch 3: Fondo Crema #F7F3EB -->
+  <rect x="330" y="145" width="130" height="80" rx="12" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1.5"/>
+  <rect x="331" y="146" width="128" height="78" rx="11" fill="#F7F3EB"/>
+  <text x="338" y="195" fill="#2E3B33" font-family="sans-serif" font-size="12" font-weight="700">Fondo Crema</text>
+  <text x="338" y="212" fill="#79776B" font-family="sans-serif" font-size="11">#F7F3EB</text>
+
+  <!-- Color Swatch 4: Terracota Acento #B55538 -->
+  <rect x="475" y="145" width="130" height="80" rx="12" fill="#B55538"/>
+  <text x="483" y="195" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="700">Terracota</text>
+  <text x="483" y="212" fill="#FFFFFF" font-family="sans-serif" font-size="11">#B55538</text>
+
+  <!-- Color Swatch 5: Gris Cálido #79776B -->
+  <rect x="620" y="145" width="130" height="80" rx="12" fill="#79776B"/>
+  <text x="628" y="195" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="700">Gris Cálido</text>
+  <text x="628" y="212" fill="#FFFFFF" font-family="sans-serif" font-size="11">#79776B</text>
+
+  <!-- 2. Botones y Controles -->
+  <text x="40" y="265" fill="#2E3B33" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="18" font-weight="700">2. Botones &amp; Controles</text>
+
+  <!-- Primary Button -->
+  <rect x="40" y="285" width="160" height="48" rx="24" fill="#2E3B33"/>
+  <text x="120" y="315" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="600" text-anchor="middle">Botón Principal</text>
+
+  <!-- Secondary Button (Beige) -->
+  <rect x="220" y="285" width="160" height="48" rx="24" fill="#BFAE8F"/>
+  <text x="300" y="315" fill="#2E3B33" font-family="sans-serif" font-size="14" font-weight="600" text-anchor="middle">Botón Secundario</text>
+
+  <!-- Outline Button -->
+  <rect x="400" y="285" width="160" height="48" rx="24" fill="none" stroke="#2E3B33" stroke-width="1.5"/>
+  <text x="480" y="315" fill="#2E3B33" font-family="sans-serif" font-size="14" font-weight="600" text-anchor="middle">Botón Delineado</text>
+
+  <!-- Terracotta Action Button -->
+  <rect x="580" y="285" width="160" height="48" rx="24" fill="#B55538"/>
+  <text x="660" y="315" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="600" text-anchor="middle">Acción Destacada</text>
+
+  <!-- 3. Chips y Filtros -->
+  <text x="40" y="375" fill="#2E3B33" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="18" font-weight="700">3. Chips de Categorías y Rangos</text>
+
+  <!-- Chip Activo (Dark Green) -->
+  <rect x="40" y="395" width="105" height="36" rx="18" fill="#2E3B33"/>
+  <text x="92" y="418" fill="#FFFFFF" font-family="sans-serif" font-size="13" font-weight="600" text-anchor="middle">Seleccionado</text>
+
+  <!-- Chip Inactivo (Crema/Borde) -->
+  <rect x="155" y="395" width="105" height="36" rx="18" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1"/>
+  <text x="207" y="418" fill="#79776B" font-family="sans-serif" font-size="13" font-weight="500" text-anchor="middle">Desactivado</text>
+
+  <!-- Chip Rango de Precio -->
+  <rect x="270" y="395" width="125" height="36" rx="18" fill="#FFFFFF" stroke="#2E3B33" stroke-width="1.5"/>
+  <text x="332" y="418" fill="#2E3B33" font-family="sans-serif" font-size="13" font-weight="600" text-anchor="middle">$5.00 a $10.00</text>
+
+  <!-- Chip Ingrediente con Icono Vectorial -->
+  <rect x="405" y="395" width="115" height="36" rx="18" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1"/>
+  <circle cx="425" cy="413" r="6" fill="#B55538"/>
+  <text x="465" y="418" fill="#2E3B33" font-family="sans-serif" font-size="13" font-weight="500" text-anchor="middle">Tomate</text>
+
+  <!-- 4. Barra de Navegación Inferior (4 Pestañas) -->
+  <text x="40" y="475" fill="#2E3B33" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="18" font-weight="700">4. Barra de Navegación Inferior (4 Secciones: Home, Búsqueda, Cuenta, Recibos)</text>
+
+  <g transform="translate(40, 495)">
+    <!-- Nav Container -->
+    <rect width="710" height="72" rx="20" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1"/>
+
+    <!-- Tab 1: Home (Active) -->
+    <g transform="translate(45, 12)">
+      <rect x="0" y="0" width="110" height="48" rx="24" fill="#2E3B33"/>
+      <path d="M40 20L49 13L58 20V31H40V20Z" fill="#BFAE8F"/>
+      <text x="75" y="29" fill="#FFFFFF" font-family="sans-serif" font-size="13" font-weight="700">Home</text>
+    </g>
+
+    <!-- Tab 2: Búsqueda -->
+    <g transform="translate(230, 16)">
+      <circle cx="45" cy="18" r="8" stroke="#79776B" stroke-width="2" fill="none"/>
+      <line x1="51" y1="24" x2="57" y2="30" stroke="#79776B" stroke-width="2"/>
+      <text x="70" y="24" fill="#79776B" font-family="sans-serif" font-size="13" font-weight="500">Búsqueda</text>
+    </g>
+
+    <!-- Tab 3: Cuenta -->
+    <g transform="translate(415, 16)">
+      <circle cx="45" cy="14" r="6" stroke="#79776B" stroke-width="2" fill="none"/>
+      <path d="M37 28C37 24 41 22 45 22C49 22 53 24 53 28" stroke="#79776B" stroke-width="2" fill="none"/>
+      <text x="68" y="24" fill="#79776B" font-family="sans-serif" font-size="13" font-weight="500">Cuenta</text>
+    </g>
+
+    <!-- Tab 4: Recibos -->
+    <g transform="translate(585, 16)">
+      <rect x="38" y="10" width="14" height="18" rx="2" stroke="#79776B" stroke-width="2" fill="none"/>
+      <line x1="42" y1="15" x2="48" y2="15" stroke="#79776B" stroke-width="1.5"/>
+      <line x1="42" y1="19" x2="48" y2="19" stroke="#79776B" stroke-width="1.5"/>
+      <line x1="42" y1="23" x2="46" y2="23" stroke="#79776B" stroke-width="1.5"/>
+      <text x="62" y="24" fill="#79776B" font-family="sans-serif" font-size="13" font-weight="500">Recibos</text>
+    </g>
+  </g>
+
+  <!-- 5. Componentes de Tarjetas de Producto -->
+  <text x="40" y="615" fill="#2E3B33" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="18" font-weight="700">5. Tarjetas de Productos Gastronómicos</text>
+
+  <!-- Tarjeta Vertical Destacada -->
+  <g transform="translate(40, 635)">
+    <rect width="210" height="240" rx="18" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1"/>
+    <!-- Product Graphic / Visual -->
+    <rect x="12" y="12" width="186" height="110" rx="14" fill="#BFAE8F" opacity="0.35"/>
+    <circle cx="105" cy="67" r="38" fill="#BFAE8F"/>
+    <circle cx="105" cy="67" r="30" fill="#E8E0D2"/>
+    <circle cx="95" cy="60" r="10" fill="#B55538"/>
+    <circle cx="115" cy="72" r="12" fill="#2E3B33"/>
+
+    <!-- Badge -->
+    <rect x="22" y="22" width="80" height="22" rx="11" fill="#2E3B33"/>
+    <text x="62" y="37" fill="#FFFFFF" font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle">★ Popular</text>
+
+    <!-- Content -->
+    <text x="16" y="145" fill="#2E3B33" font-family="sans-serif" font-size="15" font-weight="700">Pupusas Mixtas</text>
+    <text x="16" y="165" fill="#79776B" font-family="sans-serif" font-size="12">Revueltas con queso y chicharrón</text>
+
+    <!-- Price & Button -->
+    <text x="16" y="210" fill="#2E3B33" font-family="sans-serif" font-size="18" font-weight="800">$4.50</text>
+    <rect x="154" y="186" width="44" height="36" rx="18" fill="#2E3B33"/>
+    <text x="176" y="209" fill="#FFFFFF" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">+</text>
+  </g>
+
+  <!-- Tarjeta Horizontal Catálogo -->
+  <g transform="translate(270, 635)">
+    <rect width="480" height="110" rx="18" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1"/>
+    <!-- Graphic -->
+    <rect x="12" y="12" width="86" height="86" rx="14" fill="#BFAE8F" opacity="0.35"/>
+    <circle cx="55" cy="55" r="28" fill="#BFAE8F"/>
+    <circle cx="55" cy="55" r="20" fill="#FFFFFF"/>
+    <circle cx="55" cy="55" r="14" fill="#B55538"/>
+
+    <!-- Info -->
+    <text x="115" y="38" fill="#2E3B33" font-family="sans-serif" font-size="16" font-weight="700">Horchata Artesanal Morro</text>
+    <text x="115" y="60" fill="#79776B" font-family="sans-serif" font-size="12">Bebida tradicional salvadoreña con semillas</text>
+    <text x="115" y="85" fill="#2E3B33" font-family="sans-serif" font-size="17" font-weight="800">$2.25</text>
+
+    <!-- Tag -->
+    <rect x="330" y="66" width="65" height="24" rx="12" fill="#F7F3EB"/>
+    <text x="362" y="82" fill="#79776B" font-family="sans-serif" font-size="11" font-weight="600" text-anchor="middle">Bebida</text>
+
+    <rect x="410" y="60" width="56" height="36" rx="18" fill="#2E3B33"/>
+    <text x="438" y="83" fill="#FFFFFF" font-family="sans-serif" font-size="18" font-weight="bold" text-anchor="middle">+</text>
+  </g>
+
+  <!-- Search Input Specimen -->
+  <g transform="translate(270, 765)">
+    <rect width="480" height="52" rx="26" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1"/>
+    <circle cx="36" cy="26" r="8" stroke="#79776B" stroke-width="2" fill="none"/>
+    <line x1="42" y1="32" x2="48" y2="38" stroke="#79776B" stroke-width="2"/>
+    <text x="60" y="32" fill="#79776B" font-family="sans-serif" font-size="14">Buscar platillos o ingredientes...</text>
+
+    <rect x="424" y="8" width="46" height="36" rx="18" fill="#2E3B33"/>
+    <!-- Filter icon -->
+    <line x1="439" y1="20" x2="455" y2="20" stroke="#FFFFFF" stroke-width="1.8"/>
+    <line x1="441" y1="26" x2="453" y2="26" stroke="#FFFFFF" stroke-width="1.8"/>
+    <line x1="444" y1="32" x2="450" y2="32" stroke="#FFFFFF" stroke-width="1.8"/>
+  </g>
+
+</svg>

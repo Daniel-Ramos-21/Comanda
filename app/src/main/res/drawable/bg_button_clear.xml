@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/munchly_border">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/munchly_surface_warm" />
+            <stroke
+                android:width="1.2dp"
+                android:color="@color/munchly_border" />
+            <corners android:radius="@dimen/corner_radius_button" />
+        </shape>
+    </item>
+</ripple>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardProductoHorizontal"
+    android:layout_width="@dimen/product_horizontal_width"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/spacing_medium"
+    android:layout_marginBottom="@dimen/spacing_small"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="@color/munchly_surface"
+    app:cardCornerRadius="@dimen/corner_radius_card"
+    app:cardElevation="2dp"
+    app:strokeColor="@color/munchly_border"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/spacing_small">
+
+        <ImageView
+            android:id="@+id/ivProductoHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/product_image_horizontal_height"
+            android:background="@color/munchly_surface_warm"
+            android:contentDescription="@string/cd_munchly_hero"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_food_horchata" />
+
+        <TextView
+            android:id="@+id/tvNombreHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="1"
+            android:textColor="@color/munchly_text_primary"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:text="Nombre platillo" />
+
+        <TextView
+            android:id="@+id/tvDescripcionHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif"
+            android:maxLines="2"
+            android:textColor="@color/munchly_text_secondary"
+            android:textSize="12sp"
+            tools:text="Breve descripción del platillo gourmet" />
+
+        <TextView
+            android:id="@+id/tvPrecioHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/munchly_accent"
+            android:textSize="@dimen/text_size_price"
+            android:textStyle="bold"
+            tools:text="$0.00" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

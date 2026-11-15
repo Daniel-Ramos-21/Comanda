@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/filtrosRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/munchly_background"
+    tools:context=".FiltrosActivity">
+
+    <!-- Encabezado fijo superior -->
+    <RelativeLayout
+        android:id="@+id/topBarFiltros"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/spacing_medium"
+        android:paddingTop="@dimen/spacing_medium"
+        android:paddingEnd="@dimen/spacing_medium"
+        android:paddingBottom="@dimen/spacing_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btnCerrarFiltros"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_chip_unselected"
+            android:clickable="true"
+            android:contentDescription="@string/cd_close_filters"
+            android:focusable="true"
+            android:padding="8dp"
+            android:src="@drawable/ic_close" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:contentDescription="@string/cd_munchly_logo"
+                android:src="@drawable/ic_munchly_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/munchly_brand_name"
+                android:textColor="@color/munchly_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- Contenido con scroll -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollFiltros"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@id/bottomBarAccionesFiltro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBarFiltros">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/spacing_medium"
+            android:paddingEnd="@dimen/spacing_medium"
+            android:paddingBottom="@dimen/spacing_xlarge">
+
+            <!-- Título y subtítulo -->
+            <TextView
+                android:id="@+id/tvFiltrosTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:fontFamily="sans-serif-black"
+                android:text="@string/filters_title"
+                android:textColor="@color/munchly_text_primary"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvFiltrosSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/filters_subtitle"
+                android:textColor="@color/munchly_text_secondary"
+                android:textSize="@dimen/text_size_description" />
+
+            <!-- SECCIÓN 1: Tipo de comida -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/filter_meal_type_title"
+                android:textColor="@color/munchly_text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupTipoComida"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipDesayuno"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_meal_breakfast"
+                    android:textColor="@color/munchly_text_primary" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAlmuerzo"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_meal_lunch"
+                    android:textColor="@color/munchly_text_primary" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCena"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_meal_dinner"
+                    android:textColor="@color/munchly_text_primary" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipPostres"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_meal_desserts"
+                    android:textColor="@color/munchly_text_primary" />
+            </com.google.android.material.chip.ChipGroup>
+
+            <!-- SECCIÓN 2: Ingredientes -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/filter_ingredients_title"
+                android:textColor="@color/munchly_text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupIngredientes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                app:singleSelection="false">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAguacate"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ingredient_avocado"
+                    android:textColor="@color/munchly_text_primary"
+                    app:chipIcon="@drawable/ic_ingredient_avocado"
+                    app:chipIconSize="20dp"
+                    app:chipIconVisible="true" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipQueso"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ingredient_cheese"
+                    android:textColor="@color/munchly_text_primary"
+                    app:chipIcon="@drawable/ic_ingredient_cheese"
+                    app:chipIconSize="20dp"
+                    app:chipIconVisible="true" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipChile"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ingredient_chili"
+                    android:textColor="@color/munchly_text_primary"
+                    app:chipIcon="@drawable/ic_ingredient_chili"
+                    app:chipIconSize="20dp"
+                    app:chipIconVisible="true" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipTomate"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ingredient_tomato"
+                    android:textColor="@color/munchly_text_primary"
+                    app:chipIcon="@drawable/ic_ingredient_tomato"
+                    app:chipIconSize="20dp"
+                    app:chipIconVisible="true" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipFrijol"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ingredient_beans"
+                    android:textColor="@color/munchly_text_primary"
+                    app:chipIcon="@drawable/ic_ingredient_beans"
+                    app:chipIconSize="20dp"
+                    app:chipIconVisible="true" />
+            </com.google.android.material.chip.ChipGroup>
+
+            <!-- SECCIÓN 3: Rango de precio (Chips predefinidos según Figma) -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/filter_price_range_title"
+                android:textColor="@color/munchly_text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupRangoPrecio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipPrecioCualquiera"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/filter_price_any"
+                    android:textColor="@color/munchly_text_primary" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipPrecioHasta5"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_price_up_to_5"
+                    android:textColor="@color/munchly_text_primary" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipPrecio5a10"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_price_5_to_10"
+                    android:textColor="@color/munchly_text_primary" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipPrecio10a15"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_price_10_to_15"
+                    android:textColor="@color/munchly_text_primary" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipPrecioMas15"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_price_over_15"
+                    android:textColor="@color/munchly_text_primary" />
+            </com.google.android.material.chip.ChipGroup>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Barra inferior con botones: Limpiar y Ver Resultados -->
+    <LinearLayout
+        android:id="@+id/bottomBarAccionesFiltro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_bottom_nav"
+        android:elevation="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/spacing_medium"
+        android:paddingTop="@dimen/spacing_medium"
+        android:paddingEnd="@dimen/spacing_medium"
+        android:paddingBottom="@dimen/spacing_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLimpiarFiltros"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height_primary"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/btn_clear_filters"
+            android:textAllCaps="false"
+            android:textColor="@color/munchly_primary"
+            android:textSize="@dimen/text_size_button"
+            android:textStyle="bold"
+            app:cornerRadius="@dimen/corner_radius_button"
+            app:strokeColor="@color/munchly_border"
+            app:strokeWidth="1.5dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAplicarFiltros"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height_primary"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:layout_weight="1.6"
+            android:elevation="4dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/btn_apply_filters"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_button"
+            android:textStyle="bold"
+            app:backgroundTint="@color/munchly_primary"
+            app:cornerRadius="@dimen/corner_radius_button"
+            app:rippleColor="@color/munchly_ripple" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

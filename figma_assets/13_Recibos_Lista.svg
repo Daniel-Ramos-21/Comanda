@@ -1,0 +1,106 @@
+<svg width="390" height="844" viewBox="0 0 390 844" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="390" height="844" fill="#F7F3EB"/>
+
+  <!-- Status Bar -->
+  <text x="32" y="32" fill="#2E3B33" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="700">9:41</text>
+  <rect x="330" y="20" width="28" height="12" rx="3" stroke="#2E3B33" stroke-width="1.5" fill="none"/>
+  <rect x="332" y="22" width="20" height="8" rx="2" fill="#2E3B33"/>
+
+  <!-- Header -->
+  <g transform="translate(24, 60)">
+    <text x="0" y="20" fill="#2E3B33" font-family="'Plus Jakarta Sans', sans-serif" font-size="24" font-weight="800">Tus Recibos</text>
+    <text x="0" y="44" fill="#79776B" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">Historial de pedidos confirmados y entregados</text>
+  </g>
+
+  <!-- Orders List -->
+  <g transform="translate(24, 130)">
+    <!-- Order 1: #MN-2401 -->
+    <g transform="translate(0, 0)">
+      <rect width="342" height="135" rx="20" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1"/>
+
+      <!-- Top row: ID and Date -->
+      <text x="18" y="28" fill="#2E3B33" font-family="'Plus Jakarta Sans', sans-serif" font-size="15" font-weight="800">Orden #MN-2401</text>
+      <text x="324" y="28" fill="#79776B" font-family="sans-serif" font-size="12" text-anchor="end">Hoy, 2:30 PM</text>
+
+      <!-- Status Badge -->
+      <rect x="18" y="40" width="82" height="22" rx="11" fill="#E8F2EA"/>
+      <circle cx="28" cy="51" r="3.5" fill="#2E3B33"/>
+      <text x="56" y="55" fill="#2E3B33" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">Entregado</text>
+
+      <!-- Items summary -->
+      <text x="18" y="86" fill="#79776B" font-family="sans-serif" font-size="13">2x Pupusas Mixtas, 1x Horchata Morro</text>
+
+      <line x1="18" y1="98" x2="324" y2="98" stroke="#F7F3EB" stroke-width="1.5"/>
+
+      <!-- Total & Action -->
+      <text x="18" y="120" fill="#2E3B33" font-family="sans-serif" font-size="15" font-weight="800">Total: $12.50</text>
+      <text x="324" y="120" fill="#B55538" font-family="sans-serif" font-size="13" font-weight="700" text-anchor="end">Ver recibo →</text>
+    </g>
+
+    <!-- Order 2: #MN-2398 -->
+    <g transform="translate(0, 155)">
+      <rect width="342" height="135" rx="20" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1"/>
+      <text x="18" y="28" fill="#2E3B33" font-family="'Plus Jakarta Sans', sans-serif" font-size="15" font-weight="800">Orden #MN-2398</text>
+      <text x="324" y="28" fill="#79776B" font-family="sans-serif" font-size="12" text-anchor="end">12 Nov, 8:15 PM</text>
+
+      <rect x="18" y="40" width="82" height="22" rx="11" fill="#E8F2EA"/>
+      <circle cx="28" cy="51" r="3.5" fill="#2E3B33"/>
+      <text x="56" y="55" fill="#2E3B33" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">Entregado</text>
+
+      <text x="18" y="86" fill="#79776B" font-family="sans-serif" font-size="13">1x Tacos de Birria, 1x Bebida Fría</text>
+
+      <line x1="18" y1="98" x2="324" y2="98" stroke="#F7F3EB" stroke-width="1.5"/>
+
+      <text x="18" y="120" fill="#2E3B33" font-family="sans-serif" font-size="15" font-weight="800">Total: $7.25</text>
+      <text x="324" y="120" fill="#B55538" font-family="sans-serif" font-size="13" font-weight="700" text-anchor="end">Ver recibo →</text>
+    </g>
+
+    <!-- Order 3: #MN-2350 -->
+    <g transform="translate(0, 310)">
+      <rect width="342" height="135" rx="20" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1"/>
+      <text x="18" y="28" fill="#2E3B33" font-family="'Plus Jakarta Sans', sans-serif" font-size="15" font-weight="800">Orden #MN-2350</text>
+      <text x="324" y="28" fill="#79776B" font-family="sans-serif" font-size="12" text-anchor="end">5 Nov, 1:10 PM</text>
+
+      <rect x="18" y="40" width="82" height="22" rx="11" fill="#E8F2EA"/>
+      <circle cx="28" cy="51" r="3.5" fill="#2E3B33"/>
+      <text x="56" y="55" fill="#2E3B33" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">Entregado</text>
+
+      <text x="18" y="86" fill="#79776B" font-family="sans-serif" font-size="13">4x Pupusas Variadas, 2x Horchata</text>
+
+      <line x1="18" y1="98" x2="324" y2="98" stroke="#F7F3EB" stroke-width="1.5"/>
+
+      <text x="18" y="120" fill="#2E3B33" font-family="sans-serif" font-size="15" font-weight="800">Total: $16.75</text>
+      <text x="324" y="120" fill="#B55538" font-family="sans-serif" font-size="13" font-weight="700" text-anchor="end">Ver recibo →</text>
+    </g>
+  </g>
+
+  <!-- Bottom Navigation Bar (Recibos Active) -->
+  <g transform="translate(16, 756)">
+    <rect width="358" height="68" rx="24" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1"/>
+    <!-- Home -->
+    <g transform="translate(24, 22)">
+      <path d="M14 11L21 6L28 11V18H14V11Z" stroke="#79776B" stroke-width="1.8" fill="none"/>
+      <text x="34" y="16" fill="#79776B" font-family="sans-serif" font-size="12" font-weight="500">Home</text>
+    </g>
+    <!-- Buscar -->
+    <g transform="translate(122, 22)">
+      <circle cx="14" cy="12" r="7" stroke="#79776B" stroke-width="1.8" fill="none"/>
+      <line x1="19" y1="17" x2="24" y2="22" stroke="#79776B" stroke-width="1.8"/>
+      <text x="34" y="16" fill="#79776B" font-family="sans-serif" font-size="12" font-weight="500">Buscar</text>
+    </g>
+    <!-- Cuenta -->
+    <g transform="translate(216, 22)">
+      <circle cx="12" cy="10" r="5" stroke="#79776B" stroke-width="1.8" fill="none"/>
+      <path d="M5 22C5 18 8 16 12 16C16 16 19 18 19 22" stroke="#79776B" stroke-width="1.8" fill="none"/>
+      <text x="30" y="16" fill="#79776B" font-family="sans-serif" font-size="12" font-weight="500">Cuenta</text>
+    </g>
+    <!-- Recibos Active -->
+    <g transform="translate(288, 11)">
+      <rect width="92" height="46" rx="23" fill="#2E3B33"/>
+      <rect x="20" y="15" width="12" height="16" rx="2" stroke="#BFAE8F" stroke-width="2" fill="none"/>
+      <line x1="23" y1="20" x2="29" y2="20" stroke="#BFAE8F" stroke-width="1.6"/>
+      <line x1="23" y1="24" x2="29" y2="24" stroke="#BFAE8F" stroke-width="1.6"/>
+      <text x="38" y="27" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="700">Recibos</text>
+    </g>
+  </g>
+</svg>

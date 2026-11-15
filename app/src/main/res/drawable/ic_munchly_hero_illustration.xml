@@ -1,0 +1,107 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="156dp"
+    android:viewportWidth="360"
+    android:viewportHeight="280">
+
+    <!-- Círculo de fondo ambiental cálido -->
+    <path
+        android:fillColor="#E8DFCF"
+        android:pathData="M180,140m-110,0a110,110 0,1 1,220 0a110,110 0,1 1,-220 0" />
+
+    <!-- Hojas botánicas decorativas de fondo -->
+    <path
+        android:fillColor="@color/munchly_primary"
+        android:alpha="0.25"
+        android:pathData="M70,80 C60,50 85,30 110,40 C105,65 90,85 70,80 Z" />
+    <path
+        android:fillColor="@color/munchly_primary"
+        android:alpha="0.25"
+        android:pathData="M290,75 C310,50 330,70 325,95 C300,95 285,85 290,75 Z" />
+
+    <!-- Sombra del cuenco artesanal -->
+    <path
+        android:fillColor="#D6CBB8"
+        android:pathData="M180,230 C120,230 90,218 90,215 C90,212 120,200 180,200 C240,200 270,212 270,215 C270,218 240,230 180,230 Z" />
+
+    <!-- Base y cuerpo del bowl cerámico gourmet (verde oliva oscuro) -->
+    <path
+        android:fillColor="@color/munchly_primary"
+        android:pathData="M95,130 C95,190 135,215 180,215 C225,215 265,190 265,130 L95,130 Z" />
+
+    <!-- Borde interior del cuenco cerámico -->
+    <path
+        android:fillColor="@color/munchly_primary_dark"
+        android:pathData="M180,118 C135,118 95,123 95,130 C95,137 135,142 180,142 C225,142 265,137 265,130 C265,123 225,118 180,118 Z" />
+
+    <!-- Base de arroz / ramen artesanal -->
+    <path
+        android:fillColor="@color/munchly_background"
+        android:pathData="M180,121 C142,121 105,125 105,131 C105,137 142,141 180,141 C218,141 255,137 255,131 C255,125 218,121 180,121 Z" />
+
+    <!-- Delicadezas culinarias: Láminas terracota (salmón / corte gourmet marinado) -->
+    <path
+        android:fillColor="@color/munchly_accent"
+        android:pathData="M130,128 C130,122 145,116 160,120 C165,126 150,135 135,133 Z" />
+    <path
+        android:fillColor="@color/munchly_accent_light"
+        android:pathData="M145,132 C145,126 160,120 175,124 C180,130 165,139 150,137 Z" />
+    <path
+        android:fillColor="@color/munchly_accent"
+        android:pathData="M160,135 C160,129 175,123 190,127 C195,133 180,142 165,140 Z" />
+
+    <!-- Aguacate / Brotes frescos (tonos verdes) -->
+    <path
+        android:fillColor="#5A7D5A"
+        android:pathData="M200,125 C215,120 230,128 228,135 C218,138 202,135 200,125 Z" />
+    <path
+        android:fillColor="#7B9E7B"
+        android:pathData="M210,130 C223,126 235,132 233,138 C224,141 212,138 210,130 Z" />
+
+    <!-- Huevo poché / guarnición especial -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M180,128m-14,0a14,14 0,1 1,28 0a14,14 0,1 1,-28 0" />
+    <path
+        android:fillColor="#EAA838"
+        android:pathData="M180,128m-7,0a7,7 0,1 1,14 0a7,7 0,1 1,-14 0" />
+
+    <!-- Semillas de sésamo / toques especiados -->
+    <path
+        android:fillColor="@color/munchly_text_secondary"
+        android:pathData="M140,125 L142,126 M165,128 L167,129 M195,132 L197,133 M215,130 L217,131"
+        android:strokeColor="@color/munchly_text_secondary"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round" />
+
+    <!-- Palillos artesanales en ángulo elegante -->
+    <path
+        android:fillColor="@color/munchly_text_primary"
+        android:pathData="M110,95 L255,160 L253,164 L108,99 Z" />
+    <path
+        android:fillColor="@color/munchly_text_secondary"
+        android:pathData="M115,88 L260,153 L258,157 L113,92 Z" />
+
+    <!-- Ondas de aroma / vapor sutil de frescura caliente -->
+    <path
+        android:strokeColor="@color/munchly_accent"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeAlpha="0.6"
+        android:fillColor="#00000000"
+        android:pathData="M150,105 C145,95 155,85 150,75 C145,65 155,55 150,45" />
+    <path
+        android:strokeColor="@color/munchly_accent"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeAlpha="0.6"
+        android:fillColor="#00000000"
+        android:pathData="M180,100 C175,90 185,80 180,70 C175,60 185,50 180,40" />
+    <path
+        android:strokeColor="@color/munchly_accent"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeAlpha="0.6"
+        android:fillColor="#00000000"
+        android:pathData="M210,105 C205,95 215,85 210,75 C205,65 215,55 210,45" />
+</vector>
