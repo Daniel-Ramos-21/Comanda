@@ -60,10 +60,27 @@ public class BusquedaActivity extends AppCompatActivity {
 
     private void setupWindowInsets() {
         View root = findViewById(R.id.busquedaRoot);
+
         if (root != null) {
+
+            final int initialLeft = root.getPaddingLeft();
+            final int initialTop = root.getPaddingTop();
+            final int initialRight = root.getPaddingRight();
+            final int initialBottom = root.getPaddingBottom();
+
             ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
-                Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-                v.setPadding(systemBars.left, 0, systemBars.right, 0);
+
+                Insets systemBars = insets.getInsets(
+                        WindowInsetsCompat.Type.systemBars()
+                );
+
+                v.setPadding(
+                        initialLeft + systemBars.left,
+                        initialTop + systemBars.top,
+                        initialRight + systemBars.right,
+                        initialBottom + systemBars.bottom
+                );
+
                 return insets;
             });
         }

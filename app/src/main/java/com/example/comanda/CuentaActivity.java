@@ -3,7 +3,6 @@ package com.example.comanda;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -31,33 +30,13 @@ public class CuentaActivity extends AppCompatActivity {
         if (root != null) {
             ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
                 Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-                v.setPadding(systemBars.left, 0, systemBars.right, 0);
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
                 return insets;
             });
         }
     }
 
     private void setupOptions() {
-        findViewById(R.id.cardOpcionDatos).setOnClickListener(v ->
-            Toast.makeText(this, "Datos personales: Daniel Ramos (danielramos20451@gmail.com)", Toast.LENGTH_SHORT).show()
-        );
-
-        findViewById(R.id.cardOpcionDirecciones).setOnClickListener(v ->
-            Toast.makeText(this, "Direcciones: 2 ubicaciones guardadas", Toast.LENGTH_SHORT).show()
-        );
-
-        findViewById(R.id.cardOpcionPagos).setOnClickListener(v ->
-            Toast.makeText(this, "Método de pago: Tarjeta Visa terminada en •••• 4242", Toast.LENGTH_SHORT).show()
-        );
-
-        findViewById(R.id.cardOpcionNotificaciones).setOnClickListener(v ->
-            Toast.makeText(this, "Notificaciones activadas", Toast.LENGTH_SHORT).show()
-        );
-
-        findViewById(R.id.cardOpcionAyuda).setOnClickListener(v ->
-            Toast.makeText(this, "Munchly Soporte: contacto@munchly.app", Toast.LENGTH_SHORT).show()
-        );
-
         findViewById(R.id.cardOpcionLogout).setOnClickListener(v -> mostrarModalCerrarSesion());
     }
 
@@ -68,7 +47,6 @@ public class CuentaActivity extends AppCompatActivity {
                 .setMessage(R.string.account_logout_confirm_desc)
                 .setNegativeButton(R.string.account_cancel, (dialog, which) -> dialog.dismiss())
                 .setPositiveButton(R.string.account_logout, (dialog, which) -> {
-                    Toast.makeText(this, "Sesión cerrada correctamente", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, MenuActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intent);

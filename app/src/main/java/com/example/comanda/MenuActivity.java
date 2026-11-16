@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -128,21 +129,44 @@ public class MenuActivity extends AppCompatActivity {
         cargarDatosDesdeFirestore();
     }
 
+
     private void setupWindowInsets() {
         View root = findViewById(R.id.menuRoot);
-        if (root != null) {
+        View bottomNav = findViewById(R.id.bottomNavigationContainer);
+
+        if (root != null && bottomNav != null) {
+
+            final int alturaBase = getResources()
+                    .getDimensionPixelSize(R.dimen.bottom_nav_height);
+
             ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
-                Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-                v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
-                // La barra inferior fija se posiciona contra el borde inferior de la ventana
-                View bottomNav = findViewById(R.id.bottomNavigationContainer);
-                if (bottomNav != null) {
-                    bottomNav.setPadding(0, 0, 0, systemBars.bottom);
-                }
+
+                Insets systemBars = insets.getInsets(
+                        WindowInsetsCompat.Type.systemBars()
+                );
+                // Mantener el espacio lateral del sistema
+                v.setPadding(
+                        systemBars.left,
+                        0,
+                        systemBars.right,
+                        0
+                );
+                // Sumar el espacio inferior a la altura de la barra
+                ViewGroup.LayoutParams params = bottomNav.getLayoutParams();
+                params.height = alturaBase + systemBars.bottom;
+                bottomNav.setLayoutParams(params);
+                // Reservar el espacio inferior sin reducir el área de los elementos
+                bottomNav.setPadding(
+                        bottomNav.getPaddingLeft(),
+                        bottomNav.getPaddingTop(),
+                        bottomNav.getPaddingRight(),
+                        systemBars.bottom
+                );
                 return insets;
             });
         }
     }
+
 
     private void initViews() {
         nestedScroll = findViewById(R.id.nestedScrollMenu);
