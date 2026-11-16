@@ -1,0 +1,120 @@
+<svg width="390" height="844" viewBox="0 0 390 844" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="390" height="844" fill="#F7F3EB"/>
+
+  <!-- Food Visual Header (Hero) -->
+  <g transform="translate(0, 0)">
+    <rect width="390" height="280" fill="#BFAE8F" opacity="0.35"/>
+    <circle cx="195" cy="140" r="100" fill="#BFAE8F"/>
+    <circle cx="195" cy="140" r="75" fill="#F7F3EB"/>
+    <circle cx="170" cy="125" r="28" fill="#B55538"/>
+    <circle cx="215" cy="155" r="32" fill="#2E3B33"/>
+    <circle cx="190" cy="170" r="20" fill="#5A785A"/>
+
+    <!-- Nav Overlay -->
+    <!-- Back Button -->
+    <circle cx="44" cy="52" r="20" fill="#FFFFFF" opacity="0.95"/>
+    <path d="M47 44L39 52L47 60" stroke="#2E3B33" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Favorite Button -->
+    <circle cx="346" cy="52" r="20" fill="#FFFFFF" opacity="0.95"/>
+    <path d="M346 58L339 51C336 48 336 43 340 41C343 39 345 41 346 42C347 41 349 39 352 41C356 43 356 48 353 51L346 58Z" fill="#B55538"/>
+  </g>
+
+  <!-- Sheet Container -->
+  <g transform="translate(0, 260)">
+    <rect width="390" height="584" rx="32" fill="#F7F3EB"/>
+
+    <!-- Badge -->
+    <g transform="translate(24, 28)">
+      <rect width="170" height="26" rx="13" fill="#2E3B33"/>
+      <text x="85" y="17" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">★ Más pedido • Tradicional</text>
+    </g>
+
+    <!-- Title & Price -->
+    <g transform="translate(24, 68)">
+      <text x="0" y="24" fill="#2E3B33" font-family="'Plus Jakarta Sans', sans-serif" font-size="22" font-weight="800">Pupusas Mixtas</text>
+      <text x="342" y="24" fill="#2E3B33" font-family="'Plus Jakarta Sans', sans-serif" font-size="24" font-weight="800" text-anchor="end">$4.50</text>
+    </g>
+
+    <!-- Description -->
+    <g transform="translate(24, 108)">
+      <text x="0" y="16" fill="#79776B" font-family="sans-serif" font-size="13" line-height="20">
+        Elaboradas a mano con maíz recién molido, rellenas de
+      </text>
+      <text x="0" y="34" fill="#79776B" font-family="sans-serif" font-size="13">
+        abundante queso quesillo derretido y chicharrón crujiente.
+      </text>
+      <text x="0" y="52" fill="#79776B" font-family="sans-serif" font-size="13">
+        Servidas con curtido artesanal y salsa de tomate casera.
+      </text>
+    </g>
+
+    <!-- Ingredientes destacados -->
+    <g transform="translate(24, 185)">
+      <text x="0" y="14" fill="#2E3B33" font-family="'Plus Jakarta Sans', sans-serif" font-size="15" font-weight="700">Ingredientes incluidos</text>
+
+      <!-- Ingredient icons row -->
+      <g transform="translate(0, 24)">
+        <!-- Queso -->
+        <g transform="translate(0, 0)">
+          <circle cx="22" cy="22" r="22" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1"/>
+          <path d="M16 26L26 14V26H16Z" fill="#BFAE8F"/>
+          <text x="22" y="56" fill="#2E3B33" font-family="sans-serif" font-size="10" font-weight="600" text-anchor="middle">Queso</text>
+        </g>
+
+        <!-- Chicharrón -->
+        <g transform="translate(68, 0)">
+          <circle cx="22" cy="22" r="22" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1"/>
+          <circle cx="22" cy="22" r="10" fill="#B55538"/>
+          <text x="22" y="56" fill="#2E3B33" font-family="sans-serif" font-size="10" font-weight="600" text-anchor="middle">Chicharrón</text>
+        </g>
+
+        <!-- Frijol -->
+        <g transform="translate(136, 0)">
+          <circle cx="22" cy="22" r="22" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1"/>
+          <ellipse cx="22" cy="22" rx="9" ry="6" fill="#79776B"/>
+          <text x="22" y="56" fill="#2E3B33" font-family="sans-serif" font-size="10" font-weight="600" text-anchor="middle">Frijol</text>
+        </g>
+
+        <!-- Maíz -->
+        <g transform="translate(204, 0)">
+          <circle cx="22" cy="22" r="22" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1"/>
+          <circle cx="22" cy="22" r="10" fill="#BFAE8F"/>
+          <text x="22" y="56" fill="#2E3B33" font-family="sans-serif" font-size="10" font-weight="600" text-anchor="middle">Maíz</text>
+        </g>
+
+        <!-- Salsa Tomate -->
+        <g transform="translate(272, 0)">
+          <circle cx="22" cy="22" r="22" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1"/>
+          <circle cx="22" cy="22" r="8" fill="#B55538"/>
+          <text x="22" y="56" fill="#2E3B33" font-family="sans-serif" font-size="10" font-weight="600" text-anchor="middle">Salsa</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Selector de Cantidad & Indicaciones -->
+    <g transform="translate(24, 290)">
+      <text x="0" y="24" fill="#2E3B33" font-family="'Plus Jakarta Sans', sans-serif" font-size="15" font-weight="700">Cantidad</text>
+
+      <!-- Counter (- 2 +) -->
+      <g transform="translate(222, 0)">
+        <rect width="120" height="40" rx="20" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1"/>
+        <text x="22" y="26" fill="#2E3B33" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">−</text>
+        <text x="60" y="25" fill="#2E3B33" font-family="sans-serif" font-size="16" font-weight="800" text-anchor="middle">2</text>
+        <text x="98" y="26" fill="#2E3B33" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">+</text>
+      </g>
+
+      <!-- Notas especiales -->
+      <g transform="translate(0, 60)">
+        <rect width="342" height="46" rx="14" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1"/>
+        <text x="16" y="28" fill="#79776B" font-family="sans-serif" font-size="13">Notas: ej. curtido y salsa por separado...</text>
+      </g>
+    </g>
+
+    <!-- Bottom Sticky CTA -->
+    <g transform="translate(24, 430)">
+      <rect width="342" height="54" rx="27" fill="#2E3B33"/>
+      <text x="171" y="33" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="700" text-anchor="middle">Agregar al pedido • $9.00</text>
+    </g>
+  </g>
+</svg>

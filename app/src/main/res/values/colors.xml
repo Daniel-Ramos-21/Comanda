@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Paleta oficial Munchly (Figma Design System) -->
+    <color name="munchly_primary">#2E3B33</color>
+    <color name="munchly_primary_dark">#1E2521</color>
+    <color name="munchly_beige">#BFAE8F</color>
+    <color name="munchly_beige_light">#EFE8DC</color>
+    <color name="munchly_background">#F7F3EB</color>
+    <color name="munchly_accent">#B55538</color>
+    <color name="munchly_accent_light">#E8896D</color>
+    <color name="munchly_text_secondary">#79776B</color>
+    <color name="munchly_text_primary">#2E3B33</color>
+    <color name="munchly_surface">#FFFFFF</color>
+    <color name="munchly_surface_warm">#F7F3EB</color>
+    <color name="munchly_border">#E8E0D2</color>
+    <color name="munchly_border_light">#F0EAE1</color>
+    <color name="munchly_ripple">#33FFFFFF</color>
+
+    <!-- Estados interactivos y navegación -->
+    <color name="munchly_nav_inactive">#79776B</color>
+    <color name="munchly_chip_inactive">#FFFFFF</color>
+    <color name="munchly_chip_border">#E8E0D2</color>
+    <color name="munchly_card_bg">#FFFFFF</color>
+    <color name="munchly_badge_bg">#2E3B33</color>
+    <color name="munchly_badge_success">#E8F2EA</color>
+    <color name="munchly_badge_success_text">#2E3B33</color>
+    <color name="munchly_error">#B55538</color>
+
+    <!-- Compatibilidad base -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

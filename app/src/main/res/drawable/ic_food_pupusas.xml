@@ -1,0 +1,67 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="180dp"
+    android:height="140dp"
+    android:viewportWidth="180"
+    android:viewportHeight="140">
+
+    <!-- Fondo ambiental suave -->
+    <path
+        android:fillColor="#EAE3D5"
+        android:pathData="M90,70m-65,0a65,65 0,1 1,130 0a65,65 0,1 1,-130 0" />
+
+    <!-- Plato cerámico de barro/artesanal -->
+    <path
+        android:fillColor="#D8C8B0"
+        android:pathData="M90,75m-58,0a58,45 0,1 1,116 0a58,45 0,1 1,-116 0" />
+
+    <!-- Pupusa 1 (base inferior dorada) -->
+    <path
+        android:fillColor="#E2A645"
+        android:pathData="M65,72m-36,0a36,28 0,1 1,72 0a36,28 0,1 1,-72 0" />
+    <!-- Tostado artesanal / comal -->
+    <path
+        android:fillColor="#BF7D2B"
+        android:pathData="M52,65m-7,0a7,5 0,1 1,14 0a7,5 0,1 1,-14 0" />
+    <path
+        android:fillColor="#A56216"
+        android:pathData="M75,76m-8,0a8,6 0,1 1,16 0a8,6 0,1 1,-16 0" />
+
+    <!-- Pupusa 2 (superior destacada con queso derretido y loroco) -->
+    <path
+        android:fillColor="#E8B358"
+        android:pathData="M105,74m-38,0a38,30 0,1 1,76 0a38,30 0,1 1,-76 0" />
+    <!-- Tostaditas de comal -->
+    <path
+        android:fillColor="#BF7D2B"
+        android:pathData="M98,68m-9,0a9,6 0,1 1,18 0a9,6 0,1 1,-18 0" />
+    <path
+        android:fillColor="#A56216"
+        android:pathData="M120,78m-7,0a7,5 0,1 1,14 0a7,5 0,1 1,-14 0" />
+
+    <!-- Queso fundido saliendo del borde -->
+    <path
+        android:fillColor="#FFF4D0"
+        android:pathData="M136,75 C146,75 148,82 142,87 C138,89 133,85 133,80 Z" />
+    <path
+        android:fillColor="#FFF4D0"
+        android:pathData="M78,92 C74,98 84,103 89,97 C92,94 88,91 82,92 Z" />
+
+    <!-- Flor de loroco fresca (puntos verdes aromáticos) -->
+    <path
+        android:fillColor="#3B5336"
+        android:pathData="M95,64m-3,0a3,2.5 0,1 1,6 0a3,2.5 0,1 1,-6 0" />
+    <path
+        android:fillColor="#4F6D48"
+        android:pathData="M112,68m-3,0a3,2 0,1 1,6 0a3,2 0,1 1,-6 0" />
+    <path
+        android:fillColor="#3B5336"
+        android:pathData="M102,82m-3,0a3,2.5 0,1 1,6 0a3,2.5 0,1 1,-6 0" />
+
+    <!-- Guarnición: Curtido y salsa artesanal terracota -->
+    <path
+        android:fillColor="@color/munchly_accent"
+        android:pathData="M48,96 C40,94 38,105 45,108 C53,110 58,102 54,98 Z" />
+    <path
+        android:fillColor="#E39434"
+        android:pathData="M42,92 C38,90 35,97 39,101 C43,103 47,97 44,93 Z" />
+</vector>

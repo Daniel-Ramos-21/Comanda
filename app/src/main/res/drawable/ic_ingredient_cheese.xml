@@ -1,0 +1,20 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="28dp"
+    android:height="28dp"
+    android:viewportWidth="28"
+    android:viewportHeight="28">
+    <!-- Cuña de queso gourmet -->
+    <path
+        android:fillColor="#E5A638"
+        android:pathData="M4,18 L24,18 L21,9 L14,7 Z" />
+    <path
+        android:fillColor="#F4BF53"
+        android:pathData="M4,18 L14,7 L14,18 Z" />
+    <!-- Agujeros del queso -->
+    <path
+        android:fillColor="#D89528"
+        android:pathData="M8,15m-1.5,0a1.5,1.5 0,1 1,3 0a1.5,1.5 0,1 1,-3 0" />
+    <path
+        android:fillColor="#D89528"
+        android:pathData="M17,14m-1.2,0a1.2,1.2 0,1 1,2.4 0a1.2,1.2 0,1 1,-2.4 0" />
+</vector>

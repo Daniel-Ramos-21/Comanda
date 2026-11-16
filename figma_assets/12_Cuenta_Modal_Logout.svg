@@ -1,0 +1,33 @@
+<svg width="390" height="844" viewBox="0 0 390 844" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dimmed profile screen background -->
+  <rect width="390" height="844" fill="#000000" fill-opacity="0.5"/>
+
+  <!-- Modal Center Dialog Card -->
+  <g transform="translate(32, 270)">
+    <rect width="326" height="300" rx="28" fill="#F7F3EB"/>
+
+    <!-- Logout Icon Container -->
+    <circle cx="163" cy="56" r="32" fill="#FFF2EE"/>
+    <circle cx="163" cy="56" r="24" fill="#FCE6E1"/>
+    <path d="M167 52H173M173 52L170 49M173 52L170 55" stroke="#B55538" stroke-width="2" stroke-linecap="round"/>
+    <path d="M171 47V45C171 43.9 170.1 43 169 43H157C155.9 43 155 43.9 155 45V67C155 68.1 155.9 69 157 69H169C170.1 69 171 68.1 171 67V65" stroke="#B55538" stroke-width="2"/>
+
+    <!-- Title & Body -->
+    <text x="163" y="125" fill="#2E3B33" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" font-weight="800" text-anchor="middle">¿Cerrar sesión?</text>
+    <text x="163" y="155" fill="#79776B" font-family="sans-serif" font-size="13" text-anchor="middle">Tendrás que volver a identificarte</text>
+    <text x="163" y="175" fill="#79776B" font-family="sans-serif" font-size="13" text-anchor="middle">para acceder a tus pedidos y perfil.</text>
+
+    <!-- Buttons -->
+    <g transform="translate(24, 215)">
+      <!-- Cancel Button -->
+      <rect width="130" height="48" rx="24" fill="#FFFFFF" stroke="#E8E0D2" stroke-width="1.5"/>
+      <text x="65" y="29" fill="#2E3B33" font-family="sans-serif" font-size="14" font-weight="700" text-anchor="middle">Cancelar</text>
+
+      <!-- Logout Confirm Button -->
+      <g transform="translate(148, 0)">
+        <rect width="130" height="48" rx="24" fill="#B55538"/>
+        <text x="65" y="29" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="700" text-anchor="middle">Cerrar sesión</text>
+      </g>
+    </g>
+  </g>
+</svg>

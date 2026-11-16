@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detalleRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/munchly_background">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollDetalle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@id/bottomBarDetalle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <!-- Imagen Hero con botones de navegación superiores -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="280dp">
+
+                <ImageView
+                    android:id="@+id/ivDetalleHero"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/munchly_beige_light"
+                    android:contentDescription="@string/detail_title"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_food_pupusas" />
+
+                <!-- Botón Atrás -->
+                <ImageView
+                    android:id="@+id/btnDetalleAtras"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="36dp"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:clickable="true"
+                    android:contentDescription="@string/cd_close_filters"
+                    android:elevation="4dp"
+                    android:focusable="true"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_close" />
+
+                <!-- Botón Favorito -->
+                <ImageView
+                    android:id="@+id/btnDetalleFavorito"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="top|end"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:clickable="true"
+                    android:contentDescription="@string/badge_most_ordered"
+                    android:elevation="4dp"
+                    android:focusable="true"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_bell" />
+            </FrameLayout>
+
+            <!-- Contenedor de contenido -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-24dp"
+                android:background="@drawable/bg_hero_card"
+                android:elevation="2dp"
+                android:orientation="vertical"
+                android:paddingStart="24dp"
+                android:paddingTop="24dp"
+                android:paddingEnd="24dp">
+
+                <!-- Badge de popularidad -->
+                <TextView
+                    android:id="@+id/tvDetalleBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_badge_more_ordered"
+                    android:fontFamily="sans-serif-medium"
+                    android:letterSpacing="0.02"
+                    android:paddingStart="12dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="4dp"
+                    android:text="★ Más pedido • Tradicional"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <!-- Título y precio -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:id="@+id/tvDetalleNombre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_toStartOf="@id/tvDetallePrecio"
+                        android:fontFamily="sans-serif-black"
+                        android:textColor="@color/munchly_primary"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:text="Pupusas Mixtas" />
+
+                    <TextView
+                        android:id="@+id/tvDetallePrecio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="sans-serif-black"
+                        android:textColor="@color/munchly_primary"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:text="$4.50" />
+                </RelativeLayout>
+
+                <!-- Descripción gastronómica -->
+                <TextView
+                    android:id="@+id/tvDetalleDescripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif"
+                    android:lineSpacingMultiplier="1.2"
+                    android:textColor="@color/munchly_text_secondary"
+                    android:textSize="14sp"
+                    tools:text="Elaboradas a mano con maíz recién molido, rellenas de abundante queso quesillo derretido y chicharrón crujiente. Servidas con curtido artesanal y salsa de tomate casera." />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/munchly_border" />
+
+                <!-- Sección: Ingredientes incluidos con iconos vectoriales -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/detail_ingredients_title"
+                    android:textColor="@color/munchly_primary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- Queso -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/bg_chip_unselected"
+                            android:contentDescription="@string/ingredient_cheese"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_ingredient_cheese" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/ingredient_cheese"
+                            android:textColor="@color/munchly_primary"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <!-- Tomate -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/bg_chip_unselected"
+                            android:contentDescription="@string/ingredient_tomato"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_ingredient_tomato" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/ingredient_tomato"
+                            android:textColor="@color/munchly_primary"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <!-- Aguacate -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/bg_chip_unselected"
+                            android:contentDescription="@string/ingredient_avocado"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_ingredient_avocado" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/ingredient_avocado"
+                            android:textColor="@color/munchly_primary"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <!-- Frijol -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/bg_chip_unselected"
+                            android:contentDescription="@string/ingredient_beans"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_ingredient_beans" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/ingredient_beans"
+                            android:textColor="@color/munchly_primary"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/munchly_border" />
+
+                <!-- Selector de cantidad -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Cantidad"
+                        android:textColor="@color/munchly_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:id="@+id/btnMenosCantidad"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:text="−"
+                            android:textColor="@color/munchly_primary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvCantidad"
+                            android:layout_width="32dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/munchly_primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/btnMasCantidad"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@color/munchly_primary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <!-- Campo de notas especiales -->
+                <EditText
+                    android:id="@+id/etDetalleNotas"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/bg_search_bar"
+                    android:fontFamily="sans-serif"
+                    android:hint="@string/detail_notes_hint"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textColor="@color/munchly_primary"
+                    android:textColorHint="@color/munchly_text_secondary"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Barra inferior fija con botón de agregar al pedido -->
+    <LinearLayout
+        android:id="@+id/bottomBarDetalle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_bottom_nav"
+        android:elevation="12dp"
+        android:paddingStart="24dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAgregarAlPedido"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:elevation="4dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/detail_add_to_order"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/munchly_primary"
+            app:cornerRadius="27dp"
+            app:rippleColor="@color/munchly_ripple" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

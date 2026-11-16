@@ -1,3 +1,115 @@
 <resources>
     <string name="app_name">Comanda</string>
+    <string name="munchly_brand_name">Munchly</string>
+    <string name="welcome_tagline">ALTA COCINA &amp; SABORES DE AUTOR</string>
+    <string name="welcome_title">Descubre una nueva experiencia culinaria</string>
+    <string name="welcome_description">Ingredientes frescos seleccionados a diario, recetas artesanales y una carta pensada para cautivar tu paladar.</string>
+    <string name="btn_explore_menu">Explorar menú</string>
+    <string name="menu_nav_preparing">Abriendo carta de Munchly…</string>
+    <string name="cd_munchly_logo">Logotipo oficial de Munchly</string>
+    <string name="cd_munchly_hero">Especialidades culinarias artesanales de Munchly</string>
+
+    <!-- Menú Principal -->
+    <string name="greeting_title">¡Hola! ¿Qué se te antoja?</string>
+    <string name="greeting_subtitle">Encuentra algo delicioso para hoy.</string>
+    <string name="search_placeholder">Buscar platillos o ingredientes…</string>
+    <string name="section_categories">Explora por categoría</string>
+    <string name="section_house_favorites">Favoritos de la casa</string>
+    <string name="section_recommended">También te puede gustar</string>
+    <string name="section_all_products">Nuestra carta</string>
+    <string name="badge_most_ordered">Más pedido</string>
+    <string name="empty_products_title">No hay platillos disponibles</string>
+    <string name="empty_products_subtitle">Prueba cambiando tu búsqueda o seleccionando otra categoría.</string>
+    <string name="error_loading_products">No pudimos conectar con la carta. Mostrando recomendaciones locales.</string>
+    <string name="category_all">Todos</string>
+    <string name="category_breakfast">Desayunos</string>
+    <string name="category_lunch">Almuerzos</string>
+    <string name="category_drinks">Bebidas</string>
+    <string name="btn_remove_filters">Quitar filtros</string>
+
+    <!-- Barra de navegación inferior (Figma Munchly) -->
+    <string name="nav_home">Inicio</string>
+    <string name="nav_search">Búsqueda</string>
+    <string name="nav_account">Cuenta</string>
+    <string name="nav_receipts">Recibos</string>
+    <string name="nav_orders">Recibos</string>
+    <string name="nav_profile">Cuenta</string>
+    <string name="feature_coming_soon">Apartado disponible en la siguiente etapa</string>
+
+    <!-- Pantalla de Filtros (Figma Munchly) -->
+    <string name="filters_title">Filtros</string>
+    <string name="filters_subtitle">Encuentra exactamente lo que buscas.</string>
+    <string name="filter_meal_type_title">Categoría</string>
+    <string name="filter_meal_all">Todos</string>
+    <string name="filter_meal_food">Comida</string>
+    <string name="filter_meal_breakfast">Desayuno</string>
+    <string name="filter_meal_lunch">Almuerzo</string>
+    <string name="filter_meal_dinner">Cena</string>
+    <string name="filter_meal_drinks">Bebidas</string>
+    <string name="filter_meal_desserts">Postres</string>
+    <string name="filter_meal_snacks">Snacks</string>
+
+    <string name="filter_ingredients_title">Ingredientes destacados</string>
+    <string name="ingredient_avocado">Aguacate</string>
+    <string name="ingredient_cheese">Queso</string>
+    <string name="ingredient_chili">Chile</string>
+    <string name="ingredient_tomato">Tomate</string>
+    <string name="ingredient_beans">Frijol</string>
+
+    <string name="filter_price_range_title">Rango de precio</string>
+    <string name="filter_price_any">Cualquier precio</string>
+    <string name="filter_price_up_to_5">Hasta $5.00</string>
+    <string name="filter_price_5_to_10">$5.00 a $10.00</string>
+    <string name="filter_price_10_to_15">$10.00 a $15.00</string>
+    <string name="filter_price_over_15">Más de $15.00</string>
+    <string name="filter_price_min">Mínimo</string>
+    <string name="filter_price_max">Máximo</string>
+    <string name="filter_price_separator">—</string>
+    <string name="filter_price_error">El precio mínimo no puede ser mayor que el máximo.</string>
+
+    <string name="btn_clear_filters">Limpiar</string>
+    <string name="btn_apply_filters">Aplicar filtros</string>
+    <string name="cd_close_filters">Cerrar filtros</string>
+    <string name="cd_filter_button">Abrir filtros avanzados</string>
+    <string name="cd_notifications">Notificaciones de Munchly</string>
+
+    <!-- Detalle de Producto -->
+    <string name="detail_title">Detalle del platillo</string>
+    <string name="detail_ingredients_title">Ingredientes incluidos</string>
+    <string name="detail_notes_hint">¿Alguna indicación especial? (ej. salsa aparte)</string>
+    <string name="detail_add_to_order">Agregar al pedido</string>
+    <string name="detail_added_success">Platillo agregado al pedido con éxito</string>
+
+    <!-- Búsqueda -->
+    <string name="search_recent_title">Búsquedas recientes</string>
+    <string name="search_popular_categories">Categorías más buscadas</string>
+    <string name="search_clear_all">Borrar todo</string>
+    <string name="search_empty_title">Sin resultados</string>
+    <string name="search_empty_subtitle">No encontramos platillos para tu búsqueda. Prueba con términos como pupusas, tacos o bebidas.</string>
+
+    <!-- Cuenta -->
+    <string name="account_title">Mi Cuenta</string>
+    <string name="account_guest_welcome">Bienvenido a Munchly</string>
+    <string name="account_guest_desc">Inicia sesión para guardar favoritos, consultar recibos y acceder a promociones exclusivas.</string>
+    <string name="account_btn_login">Iniciar sesión</string>
+    <string name="account_btn_register">Crear una cuenta nueva</string>
+    <string name="account_profile_title">Perfil de usuario</string>
+    <string name="account_personal_data">Datos personales</string>
+    <string name="account_saved_addresses">Direcciones guardadas (2)</string>
+    <string name="account_payment_methods">Métodos de pago (•••• 4242)</string>
+    <string name="account_notifications">Notificaciones y alertas</string>
+    <string name="account_help">Ayuda y soporte</string>
+    <string name="account_logout">Cerrar sesión</string>
+    <string name="account_logout_confirm_title">¿Cerrar sesión en Munchly?</string>
+    <string name="account_logout_confirm_desc">Tendrás que volver a identificarte para acceder a tus pedidos guardados.</string>
+    <string name="account_cancel">Cancelar</string>
+
+    <!-- Recibos -->
+    <string name="receipts_title">Tus Recibos</string>
+    <string name="receipts_subtitle">Historial de pedidos confirmados y entregados</string>
+    <string name="receipts_status_delivered">Entregado</string>
+    <string name="receipts_view_detail">Ver recibo →</string>
+    <string name="receipts_empty_title">Aún no tienes recibos</string>
+    <string name="receipts_empty_subtitle">Tus pedidos confirmados y el detalle de tus entregas se guardarán automáticamente aquí.</string>
+    <string name="receipts_reorder">Volver a pedir esta orden</string>
 </resources>

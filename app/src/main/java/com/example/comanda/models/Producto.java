@@ -1,6 +1,8 @@
 package com.example.comanda.models;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Producto implements Serializable {
     private String id;
     private  String nombre;
     private  String descripcion;
@@ -22,6 +24,11 @@ public class Producto {
         this.categoriaId = categoriaId;
         this.imagenUrl = imagenUrl;
         this.disponible = disponible;
+    }
+
+    public Producto(String id, String nombre, String descripcion,
+                    int precioCentavos, String categoriaId, boolean disponible) {
+        this(id, nombre, precioCentavos, descripcion, categoriaId, "", disponible);
     }
 
     public String getId() {
