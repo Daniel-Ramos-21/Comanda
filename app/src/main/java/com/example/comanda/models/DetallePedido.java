@@ -3,6 +3,7 @@ package com.example.comanda.models;
 public class DetallePedido {
     private  String productoId;
     private String nombre;
+    private  String imageUrl;
     private int cantidad;
     private int precioUnitario;
 
@@ -10,15 +11,13 @@ public class DetallePedido {
     }
 
     public DetallePedido(String productoId, String nombre,
-                         int cantidad, int precioUnitario) {
+                         String imageUrl, int cantidad,
+                         int precioUnitario) {
         this.productoId = productoId;
         this.nombre = nombre;
+        this.imageUrl = imageUrl;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
-    }
-
-    public int calcularSubtotal(){
-        return cantidad * precioUnitario;
     }
 
     public String getProductoId() {
@@ -35,6 +34,14 @@ public class DetallePedido {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public int getCantidad() {
