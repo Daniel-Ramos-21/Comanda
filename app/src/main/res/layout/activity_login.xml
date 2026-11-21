@@ -9,40 +9,60 @@
     android:background="@color/munchly_background"
     tools:context=".LoginActivity">
 
+    <!-- Botón regresar -->
 
     <!-- Encabezado de marca -->
+    <TextView
+        android:id="@+id/btnRegresar"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/bg_boton_regresar"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="‹"
+        android:textAlignment="center"
+        android:textColor="@color/munchly_primary"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Título principal -->
+
     <LinearLayout
         android:id="@+id/headerBrandLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="48dp">
+        app:layout_constraintHorizontal_bias="0.435"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:layout_width="42dp"
             android:layout_height="42dp"
-            android:src="@drawable/ic_munchly_logo"
-            android:contentDescription="@string/cd_munchly_logo" />
+            android:contentDescription="@string/cd_munchly_logo"
+            android:src="@drawable/ic_munchly_logo" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:fontFamily="sans-serif-medium"
             android:text="@string/munchly_brand_name"
             android:textColor="@color/munchly_primary"
             android:textSize="25sp"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-medium" />
+            android:textStyle="bold" />
 
     </LinearLayout>
 
-    <!-- Título principal -->
-
-    <!-- Texto descriptivo -->
     <TextView
         android:id="@+id/tvLoginTitle"
         android:layout_width="0dp"
@@ -52,6 +72,7 @@
         android:layout_marginEnd="28dp"
         android:fontFamily="sans-serif-black"
         android:text="Bienvenido de nuevo"
+        android:textAlignment="center"
         android:textColor="@color/munchly_primary"
         android:textSize="28sp"
         android:textStyle="bold"
@@ -60,6 +81,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerBrandLayout" />
 
+    <!-- Texto descriptivo -->
     <TextView
         android:id="@+id/tvLoginDescription"
         android:layout_width="0dp"
@@ -74,7 +96,6 @@
         app:layout_constraintTop_toBottomOf="@id/tvLoginTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
 
     <!-- Campo de correo electrónico -->
     <com.google.android.material.textfield.TextInputLayout
@@ -139,7 +160,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <!-- Recuperar contraseña -->
     <TextView
         android:id="@+id/tvRecuperarContrasena"
@@ -203,7 +223,5 @@
             android:textStyle="bold" />
 
     </LinearLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

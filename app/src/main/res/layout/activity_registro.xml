@@ -1,195 +1,291 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/munchly_background"
-    android:fillViewport="true"
+    android:background="#F7F3EA"
+    android:fitsSystemWindows="true"
     tools:context=".RegistroActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="28dp">
+    <!-- BOTON REGRESAR -->
+    <TextView
+        android:id="@+id/btnRegresarRegistro"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_boton_regresar"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="‹"
+        android:textColor="#293A35"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- CONTENIDO DEL REGISTRO -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollRegistro"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="62dp"
+        android:fillViewport="true"
+        android:clipToPadding="false"
+        android:scrollbars="none"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="24dp">
 
-            <ImageView
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:contentDescription="@string/munchly_brand_name"
-                android:src="@drawable/ic_munchly_logo" />
-
+            <!-- TITULO -->
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tvTituloRegistro"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="@string/munchly_brand_name"
-                android:textColor="@color/munchly_primary"
-                android:textSize="25sp"
+                android:gravity="center"
+                android:text="Crear cuenta"
+                android:textColor="#293A35"
+                android:textSize="21sp"
                 android:textStyle="bold" />
 
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Crear cuenta"
-            android:layout_gravity="center"
-            android:textColor="@color/munchly_text_primary"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="24dp"
-            android:text="Regístrate para comenzar a disfrutar de Munchly."
-            android:textColor="@color/munchly_text_secondary"
-            android:textSize="15sp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilRegistroNombre"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nombre completo"
-            app:boxCornerRadiusBottomEnd="12dp"
-            app:boxCornerRadiusBottomStart="12dp"
-            app:boxCornerRadiusTopEnd="12dp"
-            app:boxCornerRadiusTopStart="12dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etRegistroNombre"
+            <!-- DESCRIPCION -->
+            <TextView
+                android:id="@+id/tvDescripcionRegistro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords"
-                android:maxLines="1" />
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="12dp"
+                android:gravity="center"
+                android:text="Disfruta de la mejor gastronomía con Munchly."
+                android:textColor="#89877E"
+                android:textSize="11sp" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilRegistroCorreo"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="Correo electrónico"
-            app:boxCornerRadiusBottomEnd="12dp"
-            app:boxCornerRadiusBottomStart="12dp"
-            app:boxCornerRadiusTopEnd="12dp"
-            app:boxCornerRadiusTopStart="12dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etRegistroCorreo"
+            <!-- NOMBRE -->
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:maxLines="1" />
+                android:text="Nombre completo"
+                android:textColor="#293A35"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilRegistroNombre"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="6dp"
+                app:hintEnabled="false"
+                app:boxBackgroundMode="outline"
+                app:boxBackgroundColor="#FFFFFF"
+                app:boxStrokeColor="#E8E2D8"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeWidthFocused="1dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusBottomEnd="15dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilRegistroContrasena"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="Contraseña"
-            app:endIconMode="password_toggle"
-            app:boxCornerRadiusBottomEnd="12dp"
-            app:boxCornerRadiusBottomStart="12dp"
-            app:boxCornerRadiusTopEnd="12dp"
-            app:boxCornerRadiusTopStart="12dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRegistroNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nombre completo"
+                    android:inputType="textPersonName"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:textColor="#293A35"
+                    android:textColorHint="#969386"
+                    android:textSize="11sp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etRegistroContrasena"
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- CORREO -->
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:maxLines="1" />
+                android:text="Correo electrónico"
+                android:textColor="#293A35"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilRegistroCorreo"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="6dp"
+                app:hintEnabled="false"
+                app:boxBackgroundMode="outline"
+                app:boxBackgroundColor="#FFFFFF"
+                app:boxStrokeColor="#E8E2D8"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeWidthFocused="1dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusBottomEnd="15dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilRegistroConfirmarContrasena"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="Confirmar contraseña"
-            app:endIconMode="password_toggle"
-            app:boxCornerRadiusBottomEnd="12dp"
-            app:boxCornerRadiusBottomStart="12dp"
-            app:boxCornerRadiusTopEnd="12dp"
-            app:boxCornerRadiusTopStart="12dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRegistroCorreo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="tu-correo@ejemplo.com"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:textColor="#293A35"
+                    android:textColorHint="#969386"
+                    android:textSize="11sp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etRegistroConfirmarContrasena"
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- CONTRASEÑA -->
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:maxLines="1" />
+                android:text="Contraseña"
+                android:textColor="#293A35"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilRegistroContrasena"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="6dp"
+                app:hintEnabled="false"
+                app:boxBackgroundMode="outline"
+                app:boxBackgroundColor="#FFFFFF"
+                app:boxStrokeColor="#E8E2D8"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeWidthFocused="1dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:endIconMode="password_toggle">
 
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/cbAceptarTerminos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Acepto los términos de servicio y la política de privacidad"
-            android:textColor="@color/munchly_text_secondary"
-            android:textSize="14sp"
-            app:buttonTint="@color/munchly_primary" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRegistroContrasena"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Mínimo 8 caracteres"
+                    android:inputType="textPassword"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:textColor="#293A35"
+                    android:textColorHint="#969386"
+                    android:textSize="11sp" />
 
-        <com.google.android.material.button.MaterialButton
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- CONFIRMAR CONTRASEÑA -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Confirmar contraseña"
+                android:textColor="#293A35"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilRegistroConfirmarContrasena"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="6dp"
+                app:hintEnabled="false"
+                app:boxBackgroundMode="outline"
+                app:boxBackgroundColor="#FFFFFF"
+                app:boxStrokeColor="#E8E2D8"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeWidthFocused="1dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRegistroConfirmarContrasena"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Repite tu contraseña"
+                    android:inputType="textPassword"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:textColor="#293A35"
+                    android:textColorHint="#969386"
+                    android:textSize="11sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- TERMINOS -->
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbAceptarTerminos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="#293A35"
+                android:padding="0dp"
+                android:text="Acepto los Términos de Servicio y Privacidad"
+                android:textColor="#555B55"
+                android:textSize="9sp" />
+
+            <!-- CREAR CUENTA -->
+            <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCrearCuenta"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="20dp"
-            android:text="Crear cuenta"
+            android:layout_height="44dp"
+            android:layout_marginTop="8dp"
+            android:text="Crear mi cuenta"
             android:textAllCaps="false"
-            android:textSize="16sp"
-            app:backgroundTint="@color/munchly_primary"
-            app:cornerRadius="12dp" />
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:backgroundTint="#293A35"
+            app:cornerRadius="24dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="24dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- INICIAR SESION -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="¿Ya tienes cuenta? "
-                android:textColor="@color/munchly_text_secondary"
-                android:textSize="14sp" />
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvIrLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Inicia sesión"
-                android:textColor="@color/munchly_accent"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿Ya tienes cuenta? "
+                    android:textColor="#89877E"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tvIrLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="Inicia sesión"
+                    android:textColor="@color/munchly_accent"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

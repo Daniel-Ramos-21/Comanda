@@ -32,7 +32,7 @@ public class RegistroActivity extends AppCompatActivity {
     private MaterialButton btnCrearCuenta;
 
     private TextView tvIrLogin;
-    private MaterialCardView cardRegresar;
+    private TextView btnRegresarRegistro;
 
     private UsuarioRepository usuarioRepository;
 
@@ -60,6 +60,7 @@ public class RegistroActivity extends AppCompatActivity {
 
         cbAceptarTerminos = findViewById(R.id.cbAceptarTerminos);
         btnCrearCuenta = findViewById(R.id.btnCrearCuenta);
+        btnRegresarRegistro = findViewById(R.id.btnRegresarRegistro);
 
         tvIrLogin = findViewById(R.id.tvIrLogin);
     }
@@ -67,6 +68,8 @@ public class RegistroActivity extends AppCompatActivity {
     private void setupListener(){
         btnCrearCuenta.setOnClickListener(v -> crearCuenta());
         tvIrLogin.setOnClickListener(v -> abrirLogin() );
+        btnRegresarRegistro.setOnClickListener(v -> Regresar());
+
     }
 
     private void crearCuenta(){
@@ -167,6 +170,15 @@ public class RegistroActivity extends AppCompatActivity {
         Intent intent = new Intent(
                 RegistroActivity.this,
                 LoginActivity.class
+        );
+        startActivity(intent);
+        finish();
+    }
+
+    private void Regresar(){
+        Intent intent = new Intent(
+          RegistroActivity.this,
+                MenuActivity.class
         );
         startActivity(intent);
         finish();

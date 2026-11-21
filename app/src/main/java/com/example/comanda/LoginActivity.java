@@ -2,6 +2,7 @@ package com.example.comanda;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,9 @@ public class LoginActivity extends  AppCompatActivity {
     private TextInputEditText etCorreo, etContrasena;
     private MaterialButton btnIniciarSesion;
 
+    private TextView tvIrRegistro;
+    private TextView btnRegresar;
+
     private UsuarioRepository usuarioRepository;
 
     @Override
@@ -30,21 +34,27 @@ public class LoginActivity extends  AppCompatActivity {
 
         initViews();
         setupListener();
-
     }
 
     private void initViews(){
         tilCorreo = findViewById(R.id.tilLoginCorreo);
-        tilContrasena = findViewById(R.id.etLoginContrasena);
+        tilContrasena = findViewById(R.id.tilLoginContrasena);
 
         etCorreo = findViewById(R.id.etLoginCorreo);
         etContrasena = findViewById(R.id.etLoginContrasena);
 
         btnIniciarSesion = findViewById(R.id.btnIniciarSesion);
+
+        tvIrRegistro = findViewById(R.id.tvIrRegistro);
+
+        btnRegresar = findViewById(R.id.btnRegresar);
+
     }
 
     private void setupListener(){
         btnIniciarSesion.setOnClickListener(v -> iniciarSesion());
+        tvIrRegistro.setOnClickListener(v -> abrirRegistrar());
+        btnRegresar.setOnClickListener(v -> salir());
     }
 
     private void iniciarSesion(){
@@ -98,6 +108,23 @@ public class LoginActivity extends  AppCompatActivity {
                     }
                 }
         );
+    }
 
+    private  void abrirRegistrar(){
+        Intent intent = new Intent(
+                LoginActivity.this,
+                RegistroActivity.class
+        );
+        startActivity(intent);
+        finish();
+    }
+
+    private void salir(){
+        Intent intent = new Intent(
+                LoginActivity.this,
+                MenuActivity.class
+        );
+        startActivity(intent);
+        finish();
     }
 }
