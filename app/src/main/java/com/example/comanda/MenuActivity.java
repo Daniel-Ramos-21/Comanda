@@ -1,3 +1,4 @@
+
 package com.example.comanda;
 
 import android.content.Context;
@@ -130,41 +131,47 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
+
     private void setupWindowInsets() {
+
         View root = findViewById(R.id.menuRoot);
         View bottomNav = findViewById(R.id.bottomNavigationContainer);
 
-        if (root != null && bottomNav != null) {
-
-            final int alturaBase = getResources()
-                    .getDimensionPixelSize(R.dimen.bottom_nav_height);
-
-            ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
-
-                Insets systemBars = insets.getInsets(
-                        WindowInsetsCompat.Type.systemBars()
-                );
-                // Mantener el espacio lateral del sistema
-                v.setPadding(
-                        systemBars.left,
-                        0,
-                        systemBars.right,
-                        0
-                );
-                // Sumar el espacio inferior a la altura de la barra
-                ViewGroup.LayoutParams params = bottomNav.getLayoutParams();
-                params.height = alturaBase + systemBars.bottom;
-                bottomNav.setLayoutParams(params);
-                // Reservar el espacio inferior sin reducir el área de los elementos
-                bottomNav.setPadding(
-                        bottomNav.getPaddingLeft(),
-                        bottomNav.getPaddingTop(),
-                        bottomNav.getPaddingRight(),
-                        systemBars.bottom
-                );
-                return insets;
-            });
+        if (root == null || bottomNav == null) {
+            return;
         }
+
+        final int alturaBase = getResources()
+                .getDimensionPixelSize(R.dimen.bottom_nav_height);
+
+        ViewCompat.setOnApplyWindowInsetsListener(root, (view, windowInsets) -> {
+
+            Insets barrasSistema = windowInsets.getInsets(
+                    WindowInsetsCompat.Type.systemBars()
+            );
+
+            view.setPadding(
+                    barrasSistema.left,
+                    0,
+                    barrasSistema.right,
+                    0
+            );
+
+            ViewGroup.LayoutParams params = bottomNav.getLayoutParams();
+
+            params.height = alturaBase + barrasSistema.bottom;
+
+            bottomNav.setLayoutParams(params);
+
+            bottomNav.setPadding(
+                    bottomNav.getPaddingLeft(),
+                    bottomNav.getPaddingTop(),
+                    bottomNav.getPaddingRight(),
+                    barrasSistema.bottom
+            );
+
+            return windowInsets;
+        });
     }
 
 
@@ -202,16 +209,29 @@ public class MenuActivity extends AppCompatActivity {
             categoriaSeleccionadaId = cat.getId();
             aplicarFiltrosYBusqueda();
         });
-        rvCategorias.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        rvCategorias.setLayoutManager(
+                new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        );
         rvCategorias.setAdapter(categoriaAdapter);
 
         // Recomendados ("También te puede gustar")
-        recomendadosAdapter = new ProductoHorizontalAdapter(new ArrayList<>(), this::mostrarDetalleProducto);
-        rvRecomendados.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recomendadosAdapter = new ProductoHorizontalAdapter(
+                new ArrayList<>(),
+                this::mostrarDetalleProducto
+        );
+
+        rvRecomendados.setLayoutManager(
+                new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        );
         rvRecomendados.setAdapter(recomendadosAdapter);
 
         // Todos los productos
-        todosProductosAdapter = new ProductoVerticalAdapter(listaProductosFiltrada, this::mostrarDetalleProducto);
+        todosProductosAdapter = new ProductoVerticalAdapter(
+                listaProductosFiltrada,
+                this::mostrarDetalleProducto
+        );
+
         rvTodosProductos.setLayoutManager(new LinearLayoutManager(this));
         rvTodosProductos.setAdapter(todosProductosAdapter);
     }
@@ -255,20 +275,33 @@ public class MenuActivity extends AppCompatActivity {
                     "cat_desayunos",
                     true
             );
+
             mostrarDetalleProducto(favorito);
         });
 
-        // Navegación inferior persistente de 4 secciones según Figma
+        // Navegación inferior
         btnNavInicio.setOnClickListener(v -> {
             if (nestedScroll != null) {
                 nestedScroll.smoothScrollTo(0, 0);
             }
         });
 
-        btnNavBuscar.setOnClickListener(v -> startActivity(new Intent(this, BusquedaActivity.class)));
-        btnNavPedidos.setOnClickListener(v -> startActivity(new Intent(this, RecibosActivity.class)));
-        btnNavPerfil.setOnClickListener(v -> startActivity(new Intent(this, CuentaActivity.class)));
-        btnNotificaciones.setOnClickListener(v -> Toast.makeText(this, "No tienes notificaciones pendientes", Toast.LENGTH_SHORT).show());
+        btnNavBuscar.setOnClickListener(v ->
+                startActivity(new Intent(this, BusquedaActivity.class)));
+
+        btnNavPedidos.setOnClickListener(v ->
+                startActivity(new Intent(this, RecibosActivity.class)));
+
+        // CAMBIO: Perfil ahora abre Login para probar Login y Sign Up
+        btnNavPerfil.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuActivity.this, RegistroActivity.class);
+            startActivity(intent);
+        });
+
+        btnNotificaciones.setOnClickListener(v ->
+                Toast.makeText(this,
+                        "No tienes notificaciones pendientes",
+                        Toast.LENGTH_SHORT).show());
     }
 
     private void cargarDatosDesdeFirestore() {
@@ -283,7 +316,7 @@ public class MenuActivity extends AppCompatActivity {
 
             @Override
             public void onError(Exception e) {
-                // Si falla o la colección no existe aún, se usan las categorías base de identidad
+                // Si falla o la colección no existe aún, se usan las categorías base
                 poblarCategorias(new ArrayList<>());
             }
         });
@@ -294,12 +327,16 @@ public class MenuActivity extends AppCompatActivity {
             public void onSuccess(List<Producto> productos) {
                 pbCargando.setVisibility(View.GONE);
                 listaProductosOriginal.clear();
+
                 if (productos != null && !productos.isEmpty()) {
                     listaProductosOriginal.addAll(productos);
                 } else {
-                    // Si Firestore aún no tiene documentos en 'productos', cargamos la carta local curada
-                    listaProductosOriginal.addAll(repository.obtenerProductosLocalesRespaldo());
+                    // Respaldo local si Firestore aún no tiene productos
+                    listaProductosOriginal.addAll(
+                            repository.obtenerProductosLocalesRespaldo()
+                    );
                 }
+
                 aplicarFiltrosYBusqueda();
                 actualizarFavoritoDeLaCasa();
                 actualizarRecomendados();
@@ -308,9 +345,17 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onError(Exception e) {
                 pbCargando.setVisibility(View.GONE);
-                Toast.makeText(MenuActivity.this, R.string.error_loading_products, Toast.LENGTH_LONG).show();
+                Toast.makeText(
+                        MenuActivity.this,
+                        R.string.error_loading_products,
+                        Toast.LENGTH_LONG
+                ).show();
+
                 listaProductosOriginal.clear();
-                listaProductosOriginal.addAll(repository.obtenerProductosLocalesRespaldo());
+                listaProductosOriginal.addAll(
+                        repository.obtenerProductosLocalesRespaldo()
+                );
+
                 aplicarFiltrosYBusqueda();
                 actualizarFavoritoDeLaCasa();
                 actualizarRecomendados();
@@ -320,14 +365,30 @@ public class MenuActivity extends AppCompatActivity {
 
     private void poblarCategorias(List<Categoria> categoriasRemotas) {
         listaCategorias.clear();
-        listaCategorias.add(new Categoria("todos", getString(R.string.category_all), "Todos los platillos"));
+        listaCategorias.add(new Categoria(
+                "todos",
+                getString(R.string.category_all),
+                "Todos los platillos"
+        ));
 
         if (categoriasRemotas != null && !categoriasRemotas.isEmpty()) {
             listaCategorias.addAll(categoriasRemotas);
         } else {
-            listaCategorias.add(new Categoria("cat_desayunos", getString(R.string.category_breakfast), "Desayunos"));
-            listaCategorias.add(new Categoria("cat_almuerzos", getString(R.string.category_lunch), "Almuerzos"));
-            listaCategorias.add(new Categoria("cat_bebidas", getString(R.string.category_drinks), "Bebidas"));
+            listaCategorias.add(new Categoria(
+                    "cat_desayunos",
+                    getString(R.string.category_breakfast),
+                    "Desayunos"
+            ));
+            listaCategorias.add(new Categoria(
+                    "cat_almuerzos",
+                    getString(R.string.category_lunch),
+                    "Almuerzos"
+            ));
+            listaCategorias.add(new Categoria(
+                    "cat_bebidas",
+                    getString(R.string.category_drinks),
+                    "Bebidas"
+            ));
         }
 
         categoriaAdapter.notifyDataSetChanged();
@@ -335,12 +396,15 @@ public class MenuActivity extends AppCompatActivity {
 
     private void actualizarFavoritoDeLaCasa() {
         Producto favorito = null;
+
         for (Producto p : listaProductosOriginal) {
-            if (p.getNombre() != null && p.getNombre().toLowerCase().contains("pupusa")) {
+            if (p.getNombre() != null &&
+                    p.getNombre().toLowerCase().contains("pupusa")) {
                 favorito = p;
                 break;
             }
         }
+
         if (favorito == null && !listaProductosOriginal.isEmpty()) {
             favorito = listaProductosOriginal.get(0);
         }
@@ -348,46 +412,63 @@ public class MenuActivity extends AppCompatActivity {
         if (favorito != null) {
             tvFavoritoNombre.setText(favorito.getNombre());
             tvFavoritoDescripcion.setText(favorito.getDescripcion());
+
             double precio = favorito.getPrecioCentavos() / 100.0;
             tvFavoritoPrecio.setText(String.format(Locale.US, "$%.2f", precio));
+
             ivFavoritoImagen.setImageResource(R.drawable.ic_food_pupusas);
         }
     }
 
     private void actualizarRecomendados() {
         List<Producto> recomendados = new ArrayList<>();
+
         for (Producto p : listaProductosOriginal) {
-            if (p.getNombre() != null && !p.getNombre().toLowerCase().contains("pupusa")) {
+            if (p.getNombre() != null &&
+                    !p.getNombre().toLowerCase().contains("pupusa")) {
                 recomendados.add(p);
             }
         }
+
         recomendadosAdapter.setProductos(recomendados);
     }
 
     private void aplicarFiltrosYBusqueda() {
-        String query = etBuscar.getText() != null ? etBuscar.getText().toString().trim().toLowerCase() : "";
+        String query = etBuscar.getText() != null
+                ? etBuscar.getText().toString().trim().toLowerCase()
+                : "";
 
         listaProductosFiltrada.clear();
 
         for (Producto p : listaProductosOriginal) {
-            // 1. Filtro por categoría seleccionada
+
+            // 1. Filtro por categoría
             if (!"todos".equalsIgnoreCase(categoriaSeleccionadaId)) {
-                String catId = p.getCategoriaId() != null ? p.getCategoriaId().toLowerCase() : "";
+                String catId = p.getCategoriaId() != null
+                        ? p.getCategoriaId().toLowerCase()
+                        : "";
+
                 if (!catId.contains(categoriaSeleccionadaId.toLowerCase())) {
                     continue;
                 }
             }
 
-            // 2. Filtro por búsqueda de texto (nombre o descripción/ingredientes)
+            // 2. Filtro por búsqueda
             if (!query.isEmpty()) {
-                String nombre = p.getNombre() != null ? p.getNombre().toLowerCase() : "";
-                String desc = p.getDescripcion() != null ? p.getDescripcion().toLowerCase() : "";
+                String nombre = p.getNombre() != null
+                        ? p.getNombre().toLowerCase()
+                        : "";
+
+                String desc = p.getDescripcion() != null
+                        ? p.getDescripcion().toLowerCase()
+                        : "";
+
                 if (!nombre.contains(query) && !desc.contains(query)) {
                     continue;
                 }
             }
 
-            // 3. Filtros avanzados (precio, tipo comida, ingredientes)
+            // 3. Filtros avanzados
             if (filtroModelActual != null && filtroModelActual.isActivo()) {
                 if (!filtroModelActual.coincideConProducto(p)) {
                     continue;
@@ -410,24 +491,39 @@ public class MenuActivity extends AppCompatActivity {
 
     private void actualizarIndicadorFiltrosActivos() {
         if (filtroModelActual != null && filtroModelActual.isActivo()) {
+
             StringBuilder sb = new StringBuilder("Filtros: ");
+
             if (filtroModelActual.getTipoComida() != null) {
                 sb.append(filtroModelActual.getTipoComida()).append(" • ");
             }
-            if (filtroModelActual.getIngredientes() != null && !filtroModelActual.getIngredientes().isEmpty()) {
-                sb.append(String.join(", ", filtroModelActual.getIngredientes())).append(" • ");
-            }
-            if (filtroModelActual.getPrecioMin() != null || filtroModelActual.getPrecioMax() != null) {
-                sb.append("$").append(filtroModelActual.getPrecioMin() != null ? filtroModelActual.getPrecioMin() : "0")
-                        .append(" - $").append(filtroModelActual.getPrecioMax() != null ? filtroModelActual.getPrecioMax() : "∞")
+
+            if (filtroModelActual.getIngredientes() != null &&
+                    !filtroModelActual.getIngredientes().isEmpty()) {
+                sb.append(String.join(", ", filtroModelActual.getIngredientes()))
                         .append(" • ");
             }
+
+            if (filtroModelActual.getPrecioMin() != null ||
+                    filtroModelActual.getPrecioMax() != null) {
+                sb.append("$")
+                        .append(filtroModelActual.getPrecioMin() != null
+                                ? filtroModelActual.getPrecioMin() : "0")
+                        .append(" - $")
+                        .append(filtroModelActual.getPrecioMax() != null
+                                ? filtroModelActual.getPrecioMax() : "∞")
+                        .append(" • ");
+            }
+
             String texto = sb.toString();
+
             if (texto.endsWith(" • ")) {
                 texto = texto.substring(0, texto.length() - 3);
             }
+
             tvFiltroActivoTexto.setText(texto);
             layoutIndicadorFiltro.setVisibility(View.VISIBLE);
+
         } else {
             layoutIndicadorFiltro.setVisibility(View.GONE);
         }
@@ -435,6 +531,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private void mostrarDetalleProducto(Producto p) {
         if (p == null) return;
+
         Intent intent = new Intent(this, DetalleProductoActivity.class);
         intent.putExtra(DetalleProductoActivity.EXTRA_PRODUCTO, p);
         startActivity(intent);
