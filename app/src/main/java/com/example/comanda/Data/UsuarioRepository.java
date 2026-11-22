@@ -90,16 +90,37 @@ public class UsuarioRepository {
                         if (user != null) {
                             callback.onSuccess(user);
                         } else {
-                            callback.onError("No se pudo obtener el usuario.");
+                            callback.onError(
+                                    "No se pudo obtener el usuario."
+                            );
                         }
 
                     } else {
-                        callback.onError(task.getException() != null
-                                ? task.getException().getMessage()
-                                : "Error al iniciar sesión.");
+
+                        Exception error = task.getException();
+
+                        if (error instanceof com.google.firebase.auth.FirebaseAuthInvalidCredentialsException) {
+
+                            callback.onError(
+                                    "Correo o contraseña incorrectos."
+                            );
+
+                        } else if (error instanceof com.google.firebase.auth.FirebaseAuthInvalidUserException) {
+
+                            callback.onError(
+                                    "No existe una cuenta con ese correo."
+                            );
+
+                        } else {
+
+                            callback.onError(
+                                    "No se pudo iniciar sesión. Verifica tu conexión e inténtalo nuevamente."
+                            );
+                        }
                     }
                 });
     }
+
 
     // Cerrar sesión
     public void cerrarSesion() {
