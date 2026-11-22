@@ -34,6 +34,8 @@ import com.example.comanda.adapters.ProductoVerticalAdapter;
 import com.example.comanda.models.Categoria;
 import com.example.comanda.models.FiltroModel;
 import com.example.comanda.models.Producto;
+import com.example.comanda.Data.UsuarioRepository;
+import com.example.comanda.models.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +88,9 @@ public class MenuActivity extends AppCompatActivity {
     private String categoriaSeleccionadaId = "todos";
     private FiltroModel filtroModelActual = new FiltroModel();
 
+    private TextView tvGreetingTitle;
+    private UsuarioRepository usuarioRepository;
+
     private final ActivityResultLauncher<Intent> launcherFiltros = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
@@ -120,6 +125,8 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         WindowCompat.enableEdgeToEdge(getWindow());
         setContentView(R.layout.activity_menu);
+
+        usuarioRepository = new UsuarioRepository();
 
         repository = new MenuRepository();
 
@@ -201,6 +208,7 @@ public class MenuActivity extends AppCompatActivity {
         btnNavPedidos = findViewById(R.id.btnNavPedidos);
         btnNavPerfil = findViewById(R.id.btnNavPerfil);
         btnNotificaciones = findViewById(R.id.ivNotificaciones);
+        tvGreetingTitle = findViewById(R.id.tvGreetingTitle);
     }
 
     private void setupRecyclerViews() {
@@ -236,7 +244,9 @@ public class MenuActivity extends AppCompatActivity {
         rvTodosProductos.setAdapter(todosProductosAdapter);
     }
 
+
     private void setupListeners() {
+
         // Buscador reactivo
         etBuscar.addTextChangedListener(new TextWatcher() {
             @Override
@@ -258,14 +268,14 @@ public class MenuActivity extends AppCompatActivity {
             launcherFiltros.launch(intent);
         });
 
-        // Limpiar filtros activo rápido
+        // Limpiar filtros
         btnLimpiarFiltroRapido.setOnClickListener(v -> {
             filtroModelActual.limpiar();
             actualizarIndicadorFiltrosActivos();
             aplicarFiltrosYBusqueda();
         });
 
-        // Clic en la tarjeta de Favorito de la casa
+        // Tarjeta de favorito de la casa
         cardFavoritoCasa.setOnClickListener(v -> {
             Producto favorito = new Producto(
                     "fav_pupusa",
@@ -279,29 +289,81 @@ public class MenuActivity extends AppCompatActivity {
             mostrarDetalleProducto(favorito);
         });
 
-        // Navegación inferior
+        // Navegación: Inicio
         btnNavInicio.setOnClickListener(v -> {
             if (nestedScroll != null) {
                 nestedScroll.smoothScrollTo(0, 0);
             }
         });
 
+        // Navegación: Buscar
         btnNavBuscar.setOnClickListener(v ->
                 startActivity(new Intent(this, BusquedaActivity.class)));
 
+        // Navegación: Pedidos
         btnNavPedidos.setOnClickListener(v ->
                 startActivity(new Intent(this, RecibosActivity.class)));
 
-        // CAMBIO: Perfil ahora abre Login para probar Login y Sign Up
+        // Navegación: Perfil
         btnNavPerfil.setOnClickListener(v -> {
-            Intent intent = new Intent(MenuActivity.this, RegistroActivity.class);
+
+            Intent intent;
+
+            if (com.google.firebase.auth.FirebaseAuth
+                    .getInstance()
+                    .getCurrentUser() != null) {
+
+                // Tiene una sesión activa
+                intent = new Intent(MenuActivity.this, CuentaActivity.class);
+
+            } else {
+
+                // No tiene sesión: puede iniciar sesión o registrarse
+                intent = new Intent(MenuActivity.this, LoginActivity.class);
+            }
+
             startActivity(intent);
         });
 
+        // Notificaciones
         btnNotificaciones.setOnClickListener(v ->
-                Toast.makeText(this,
+                Toast.makeText(
+                        this,
                         "No tienes notificaciones pendientes",
-                        Toast.LENGTH_SHORT).show());
+                        Toast.LENGTH_SHORT
+                ).show());
+    }
+
+    private void cargarSaludo(){
+        tvGreetingTitle.setText("Hola");
+        if(!usuarioRepository.haySesionActiva()){
+            return;
+        }
+
+        usuarioRepository.obtenerPerfil(new UsuarioRepository.PerfilCallback() {
+            @Override
+            public void onSuccess(Usuario usuario) {
+                if (usuario.getNombre() != null &&
+                    !usuario.getNombre().trim().isEmpty()){
+                    tvGreetingTitle.setText(
+                            "Hola, " + usuario.getNombre().trim()
+                    );
+                }
+            }
+
+            @Override
+            public void onError(String mensaje) {
+                tvGreetingTitle.setText("Hola");
+            }
+        });
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if (usuarioRepository != null && tvGreetingTitle != null){
+            cargarSaludo();
+        }
     }
 
     private void cargarDatosDesdeFirestore() {

@@ -67,7 +67,7 @@
                         android:background="@drawable/bg_button_primary"
                         android:fontFamily="sans-serif-black"
                         android:gravity="center"
-                        android:text="DR"
+                        android:text=""
                         android:textColor="@color/munchly_beige"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -81,20 +81,22 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvCuentaNombre"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-black"
-                            android:text="Daniel Ramos"
+                            android:text="Cargando..."
                             android:textColor="@color/munchly_primary"
                             android:textSize="17sp"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvCuentaCorreo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:fontFamily="sans-serif"
-                            android:text="danielramos20451@gmail.com"
+                            android:text="Cargando..."
                             android:textColor="@color/munchly_text_secondary"
                             android:textSize="12sp" />
 

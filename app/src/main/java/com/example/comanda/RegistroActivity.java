@@ -1,3 +1,4 @@
+
 package com.example.comanda;
 
 import android.content.Intent;
@@ -10,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.comanda.Data.UsuarioRepository;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -37,7 +37,7 @@ public class RegistroActivity extends AppCompatActivity {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    protected  void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
@@ -47,10 +47,12 @@ public class RegistroActivity extends AppCompatActivity {
         setupListener();
     }
 
-    private  void initViews(){
+    // Vincular los elementos del XML
+    private void initViews() {
+
         tilNombre = findViewById(R.id.tilRegistroNombre);
         tilCorreo = findViewById(R.id.tilRegistroCorreo);
-        tilContrasena = findViewById(R.id.tilLoginContrasena);
+        tilContrasena = findViewById(R.id.tilRegistroContrasena);
         tilConfirmarContrasena = findViewById(R.id.tilRegistroConfirmarContrasena);
 
         etNombre = findViewById(R.id.etRegistroNombre);
@@ -60,93 +62,138 @@ public class RegistroActivity extends AppCompatActivity {
 
         cbAceptarTerminos = findViewById(R.id.cbAceptarTerminos);
         btnCrearCuenta = findViewById(R.id.btnCrearCuenta);
-        btnRegresarRegistro = findViewById(R.id.btnRegresarRegistro);
 
         tvIrLogin = findViewById(R.id.tvIrLogin);
+        btnRegresarRegistro = findViewById(R.id.btnRegresarRegistro);
     }
 
-    private void setupListener(){
+    // Eventos de la pantalla
+    private void setupListener() {
+
         btnCrearCuenta.setOnClickListener(v -> crearCuenta());
-        tvIrLogin.setOnClickListener(v -> abrirLogin() );
-        btnRegresarRegistro.setOnClickListener(v -> Regresar());
 
+        tvIrLogin.setOnClickListener(v -> abrirLogin());
+
+        btnRegresarRegistro.setOnClickListener(v -> regresarMenu());
     }
 
-    private void crearCuenta(){
+    // Registrar usuario
+    private void crearCuenta() {
+
+        limpiarErrores();
+
         String nombre = etNombre.getText().toString().trim();
         String correo = etCorreo.getText().toString().trim();
-        String contrasena = etContrasena.getText().toString().trim();
-        String confirmarContrasena = etConfirmarContrasena.getText().toString().trim();
 
+        // No recortar la contraseña, ya que los espacios podrían formar parte de ella
+        String contrasena = etContrasena.getText().toString();
+        String confirmarContrasena = etConfirmarContrasena.getText().toString();
 
-        if (correo.isEmpty()){
-            tilCorreo.setError("Ingresa tu correo electronico");
+        // Validar nombre
+        if (nombre.isEmpty()) {
+            tilNombre.setError("Ingresa tu nombre");
+            etNombre.requestFocus();
             return;
         }
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()){
+        if (nombre.length() < 2) {
+            tilNombre.setError("El nombre debe tener al menos 2 caracteres");
+            etNombre.requestFocus();
+            return;
+        }
+
+        // Validar correo
+        if (correo.isEmpty()) {
+            tilCorreo.setError("Ingresa tu correo electrónico");
+            etCorreo.requestFocus();
+            return;
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
             tilCorreo.setError("Ingresa un correo electrónico válido");
+            etCorreo.requestFocus();
             return;
         }
 
-        if (contrasena.isEmpty()){
+        // Validar contraseña
+        if (contrasena.isEmpty()) {
             tilContrasena.setError("Ingresa una contraseña");
+            etContrasena.requestFocus();
             return;
         }
 
-        if (contrasena.length() < 8){
+        if (contrasena.length() < 8) {
             tilContrasena.setError(
                     "La contraseña debe tener al menos 8 caracteres"
             );
+            etContrasena.requestFocus();
             return;
         }
 
-        if (!contrasena.equals(confirmarContrasena)){
-            tilContrasena.setError(
-                    "Las contraseñas no coinciden"
-            );
+        // Validar confirmación
+        if (confirmarContrasena.isEmpty()) {
+            tilConfirmarContrasena.setError("Confirma tu contraseña");
+            etConfirmarContrasena.requestFocus();
             return;
         }
 
-        if (!cbAceptarTerminos.isChecked()){
+        if (!contrasena.equals(confirmarContrasena)) {
+            tilConfirmarContrasena.setError("Las contraseñas no coinciden");
+            etConfirmarContrasena.requestFocus();
+            return;
+        }
+
+        // Validar términos
+        if (!cbAceptarTerminos.isChecked()) {
             Toast.makeText(
                     this,
-                    "Debes aceptar los términos de servicio y privicidad",
+                    "Debes aceptar los términos de servicio y privacidad",
                     Toast.LENGTH_LONG
             ).show();
             return;
         }
 
+        // Evitar múltiples solicitudes
         btnCrearCuenta.setEnabled(false);
+        btnCrearCuenta.setText("Creando cuenta...");
 
+        // Crear cuenta en Firebase y guardar perfil en Firestore
         usuarioRepository.registrarUsuario(
                 nombre,
                 correo,
                 contrasena,
                 "",
-                new UsuarioRepository.AuthCallback(){
+                new UsuarioRepository.AuthCallback() {
+
                     @Override
-                    public  void onSuccess(FirebaseUser user){
+                    public void onSuccess(FirebaseUser user) {
+
                         Toast.makeText(
                                 RegistroActivity.this,
-                                "!Tu cuenta fue creada correctamente¡",
-                                Toast.LENGTH_LONG
+                                "Cuenta creada correctamente",
+                                Toast.LENGTH_SHORT
                         ).show();
+
+                        // Ir al menú principal
                         Intent intent = new Intent(
                                 RegistroActivity.this,
                                 MenuActivity.class
                         );
+
                         intent.setFlags(
                                 Intent.FLAG_ACTIVITY_NEW_TASK |
-                                Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                        Intent.FLAG_ACTIVITY_CLEAR_TASK
                         );
+
                         startActivity(intent);
                         finish();
                     }
+
                     @Override
-                    public void onError(String mensaje)
-                    {
+                    public void onError(String mensaje) {
+
                         btnCrearCuenta.setEnabled(true);
+                        btnCrearCuenta.setText("Crear mi cuenta");
 
                         Toast.makeText(
                                 RegistroActivity.this,
@@ -158,28 +205,40 @@ public class RegistroActivity extends AppCompatActivity {
         );
     }
 
-    private void limpiarErrores(){
+    // Limpiar mensajes de validación
+    private void limpiarErrores() {
+
         tilNombre.setError(null);
         tilCorreo.setError(null);
         tilContrasena.setError(null);
         tilConfirmarContrasena.setError(null);
-
     }
 
-    private void abrirLogin(){
+    // Ir al login
+    private void abrirLogin() {
+
         Intent intent = new Intent(
                 RegistroActivity.this,
                 LoginActivity.class
         );
+
         startActivity(intent);
         finish();
     }
 
-    private void Regresar(){
+    // Regresar al menú
+    private void regresarMenu() {
+
         Intent intent = new Intent(
-          RegistroActivity.this,
+                RegistroActivity.this,
                 MenuActivity.class
         );
+
+        intent.setFlags(
+                Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP
+        );
+
         startActivity(intent);
         finish();
     }

@@ -3,6 +3,8 @@ package com.example.comanda;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -10,9 +12,17 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.comanda.Data.UsuarioRepository;
+import com.example.comanda.models.Usuario;
+
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class CuentaActivity extends AppCompatActivity {
+
+    private UsuarioRepository usuarioRepository;
+    private TextView tvCuentaNombre;
+    private TextView tvCuentaCorreo;
+    private TextView tvAvataarInitials;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +30,19 @@ public class CuentaActivity extends AppCompatActivity {
         WindowCompat.enableEdgeToEdge(getWindow());
         setContentView(R.layout.activity_cuenta);
 
+        usuarioRepository = new UsuarioRepository();
+
+        initViews();
         setupWindowInsets();
         setupOptions();
         setupBottomNav();
+        cargarPerfil();
+    }
+
+    private void initViews(){
+        tvCuentaNombre = findViewById(R.id.tvCuentaNombre);
+        tvCuentaCorreo = findViewById(R.id.tvCuentaCorreo);
+        tvAvataarInitials = findViewById(R.id.tvAvatarInitials);
     }
 
     private void setupWindowInsets() {
@@ -36,21 +56,76 @@ public class CuentaActivity extends AppCompatActivity {
         }
     }
 
+    private void cargarPerfil(){
+        if (!usuarioRepository.haySesionActiva()){
+            tvCuentaNombre.setText("Invitado");
+            tvCuentaCorreo.setText("Inicia sesión para ver tu perfil");
+            tvAvataarInitials.setText("M");
+
+            return;
+        }
+        usuarioRepository.obtenerPerfil(
+                new UsuarioRepository.PerfilCallback() {
+                    @Override
+                    public void onSuccess(Usuario usuario) {
+                        tvCuentaNombre.setText(usuario.getNombre());
+                        tvCuentaCorreo.setText(usuario.getCorreo());
+
+                        tvAvataarInitials.setText(
+                                obtenerIniciales(usuario.getNombre())
+                        );
+
+                    }
+
+                    @Override
+                    public void onError(String mensaje) {
+                        Toast.makeText(
+                                CuentaActivity.this,
+                                "No se pudo cargar tu perfil" + mensaje,
+                                Toast.LENGTH_LONG
+                        ).show();
+                    }
+                }
+        );
+    }
+
+    private String obtenerIniciales(String nombre){
+        if (nombre == null || nombre.trim().isEmpty()){
+            return "M";
+        }
+
+        String[] palabras = nombre.trim().split("\\s+");
+
+
+        if (palabras.length == 1){
+            return palabras[0].substring(0,1).toUpperCase();
+        }
+
+        String primera = palabras[0].substring(0,1);
+        String segunda = palabras[1].substring(0,1);
+
+        return (primera + segunda).toUpperCase();
+    }
+
+
     private void setupOptions() {
         findViewById(R.id.cardOpcionLogout).setOnClickListener(v -> mostrarModalCerrarSesion());
     }
 
     private void mostrarModalCerrarSesion() {
-        // Modal de confirmación según Figma Screen 12_Cuenta_Modal_Logout
         new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.account_logout_confirm_title)
                 .setMessage(R.string.account_logout_confirm_desc)
                 .setNegativeButton(R.string.account_cancel, (dialog, which) -> dialog.dismiss())
                 .setPositiveButton(R.string.account_logout, (dialog, which) -> {
-                    Intent intent = new Intent(this, MenuActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(intent);
-                    finish();
+                   usuarioRepository.cerrarSesion();
+
+                   Intent intent = new Intent(this, MenuActivity.class);
+                   intent.setFlags(
+                                Intent.FLAG_ACTIVITY_NEW_TASK |
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK
+                   );
+                   startActivity(intent);
                 })
                 .show();
     }
@@ -73,4 +148,6 @@ public class CuentaActivity extends AppCompatActivity {
             finish();
         });
     }
+
+
 }

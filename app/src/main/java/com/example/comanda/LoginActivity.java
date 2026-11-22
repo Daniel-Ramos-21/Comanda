@@ -1,4 +1,6 @@
+
 package com.example.comanda;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -11,10 +13,9 @@ import com.example.comanda.Data.UsuarioRepository;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends  AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private TextInputLayout tilCorreo, tilContrasena;
     private TextInputEditText etCorreo, etContrasena;
@@ -26,7 +27,7 @@ public class LoginActivity extends  AppCompatActivity {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -36,7 +37,9 @@ public class LoginActivity extends  AppCompatActivity {
         setupListener();
     }
 
-    private void initViews(){
+    // Vincular elementos del XML
+    private void initViews() {
+
         tilCorreo = findViewById(R.id.tilLoginCorreo);
         tilContrasena = findViewById(R.id.tilLoginContrasena);
 
@@ -46,49 +49,68 @@ public class LoginActivity extends  AppCompatActivity {
         btnIniciarSesion = findViewById(R.id.btnIniciarSesion);
 
         tvIrRegistro = findViewById(R.id.tvIrRegistro);
-
         btnRegresar = findViewById(R.id.btnRegresar);
-
     }
 
-    private void setupListener(){
+    // Eventos de los botones
+    private void setupListener() {
+
         btnIniciarSesion.setOnClickListener(v -> iniciarSesion());
+
         tvIrRegistro.setOnClickListener(v -> abrirRegistrar());
+
         btnRegresar.setOnClickListener(v -> salir());
     }
 
-    private void iniciarSesion(){
+    // Validar e iniciar sesión
+    private void iniciarSesion() {
 
         String correo = etCorreo.getText().toString().trim();
-        String contrasena = etContrasena.getText().toString().trim();
 
-        tilCorreo.setError(null);
-        tilContrasena.setError(null);
+        // No aplicar trim a la contraseña
+        String contrasena = etContrasena.getText().toString();
 
-        if (correo.isEmpty()){
-            tilCorreo.setError("Ingresa tu contraseña");
+        limpiarErrores();
+
+        // Validar correo vacío
+        if (correo.isEmpty()) {
+            tilCorreo.setError("Ingresa tu correo electrónico");
+            etCorreo.requestFocus();
             return;
         }
 
-        if(!Patterns.EMAIL_ADDRESS.matcher(correo).matches()){
+        // Validar formato del correo
+        if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
             tilCorreo.setError("Ingresa un correo válido");
+            etCorreo.requestFocus();
             return;
         }
 
-        if (contrasena.isEmpty()){
+        // Validar contraseña vacía
+        if (contrasena.isEmpty()) {
             tilContrasena.setError("Ingresa tu contraseña");
+            etContrasena.requestFocus();
             return;
         }
 
+        // Evitar múltiples solicitudes
         btnIniciarSesion.setEnabled(false);
+        btnIniciarSesion.setText("Verificando...");
 
-        usuarioRepository.iniciarSesion(correo, contrasena,
-                new UsuarioRepository.AuthCallback(){
+        // Conectar con Firebase Authentication
+        usuarioRepository.iniciarSesion(
+                correo,
+                contrasena,
+                new UsuarioRepository.AuthCallback() {
+
                     @Override
-                    public void onSuccess(FirebaseUser user){
-                        Toast.makeText(LoginActivity.this,
+                    public void onSuccess(FirebaseUser user) {
+
+                        Toast.makeText(
+                                LoginActivity.this,
                                 "Bienvenido",
-                                Toast.LENGTH_SHORT).show();
+                                Toast.LENGTH_SHORT
+                        ).show();
 
                         Intent intent = new Intent(
                                 LoginActivity.this,
@@ -100,30 +122,50 @@ public class LoginActivity extends  AppCompatActivity {
                     }
 
                     @Override
-                    public void onError(String mensaje){
+                    public void onError(String mensaje) {
+
                         btnIniciarSesion.setEnabled(true);
-                        Toast.makeText(LoginActivity.this,
+                        btnIniciarSesion.setText("Iniciar sesión");
+
+                        limpiarErrores();
+
+                        Toast.makeText(
+                                LoginActivity.this,
                                 mensaje,
-                                Toast.LENGTH_LONG).show();
+                                Toast.LENGTH_LONG
+                        ).show();
                     }
                 }
         );
     }
 
-    private  void abrirRegistrar(){
+    // Limpiar mensajes de validación
+    private void limpiarErrores() {
+
+        tilCorreo.setError(null);
+        tilContrasena.setError(null);
+    }
+
+    // Abrir pantalla de registro
+    private void abrirRegistrar() {
+
         Intent intent = new Intent(
                 LoginActivity.this,
                 RegistroActivity.class
         );
+
         startActivity(intent);
         finish();
     }
 
-    private void salir(){
+    // Regresar al menú
+    private void salir() {
+
         Intent intent = new Intent(
                 LoginActivity.this,
                 MenuActivity.class
         );
+
         startActivity(intent);
         finish();
     }
