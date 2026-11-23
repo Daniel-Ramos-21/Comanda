@@ -91,6 +91,8 @@
                 android:textSize="@dimen/text_size_greeting"
                 android:textStyle="bold" />
 
+
+
             <TextView
                 android:id="@+id/tvGreetingSubtitle"
                 android:layout_width="match_parent"
@@ -100,6 +102,16 @@
                 android:text="@string/greeting_subtitle"
                 android:textColor="@color/munchly_text_secondary"
                 android:textSize="@dimen/text_size_greeting_sub" />
+
+            <Button
+                android:id="@+id/btnPanelAdmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Panel de administración"
+                android:visibility="gone" />
+
+
 
             <!-- Búsqueda -->
             <LinearLayout

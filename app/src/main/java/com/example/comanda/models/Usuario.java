@@ -7,8 +7,20 @@ public class Usuario {
     private  String correo;
     private String telefono;
     private Date fechaRegistro;
+    private String rol;
 
     public Usuario() {
+    }
+
+    public Usuario(String UID, String nombre,
+                   String correo, String telefono,
+                   Date fechaRegistro, String rol) {
+        this.UID = UID;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.fechaRegistro = fechaRegistro;
+        this.rol = rol;
     }
 
     public Usuario(String UID, String nombre, String correo,
@@ -56,7 +68,16 @@ public class Usuario {
         return fechaRegistro;
     }
 
+
+
     public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
+    }
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

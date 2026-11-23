@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#F7F7F7">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Panel de administración"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="#222222"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gestiona el contenido de Munchly"
+        android:textSize="15sp"
+        android:textColor="#777777"
+        android:layout_marginBottom="28dp" />
+
+    <Button
+        android:id="@+id/btnCategorias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Administrar categorías"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:backgroundTint="#F28C28"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/btnProductos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Administrar productos"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:backgroundTint="#F28C28"
+        android:textColor="#FFFFFF" />
+
+</LinearLayout>
