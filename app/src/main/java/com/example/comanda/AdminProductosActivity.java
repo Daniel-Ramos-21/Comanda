@@ -1,6 +1,7 @@
 
 package com.example.comanda;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Gravity;
@@ -15,6 +16,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,13 +26,30 @@ import com.example.comanda.Data.ProductoRepository;
 import com.example.comanda.models.Categoria;
 import com.example.comanda.models.Producto;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class AdminProductosActivity extends AppCompatActivity {
+
+    private static final String CLOUD_NAME = "r3i1df5o";
+    private static final String UPLOAD_PRESET = "munchly";
+
+    private static final ExecutorService executor =
+            Executors.newSingleThreadExecutor();
 
     private ProductoRepository productoRepository;
     private CategoriaRepository categoriaRepository;
@@ -41,11 +61,17 @@ public class AdminProductosActivity extends AppCompatActivity {
 
     private List<Categoria> categorias = new ArrayList<>();
 
+    private ActivityResultLauncher<String> selectorImagen;
+
+    private Uri imagenSeleccionada;
+    private TextView tvEstadoImagen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_productos);
 
+        inicializarSelectorImagen();
         inicializarComponentes();
 
         productoRepository = new ProductoRepository();
@@ -58,6 +84,24 @@ public class AdminProductosActivity extends AppCompatActivity {
         cargarCategorias();
     }
 
+    private void inicializarSelectorImagen() {
+
+        selectorImagen = registerForActivityResult(
+                new ActivityResultContracts.GetContent(),
+                uri -> {
+                    if (uri != null) {
+                        imagenSeleccionada = uri;
+
+                        if (tvEstadoImagen != null) {
+                            tvEstadoImagen.setText(
+                                    "Imagen seleccionada. Se subirá al guardar."
+                            );
+                        }
+                    }
+                }
+        );
+    }
+
     private void inicializarComponentes() {
         contenedorProductos = findViewById(R.id.contenedorProductos);
         tvVacio = findViewById(R.id.tvVacioProductos);
@@ -65,7 +109,6 @@ public class AdminProductosActivity extends AppCompatActivity {
         btnAgregarProducto = findViewById(R.id.btnAgregarProducto);
     }
 
-    // Obtener las categorías disponibles para los productos.
     private void cargarCategorias() {
 
         btnAgregarProducto.setEnabled(false);
@@ -75,16 +118,13 @@ public class AdminProductosActivity extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(List<Categoria> resultado) {
-
                         categorias = resultado;
                         btnAgregarProducto.setEnabled(true);
-
                         cargarProductos();
                     }
 
                     @Override
                     public void onError(String mensaje) {
-
                         Toast.makeText(
                                 AdminProductosActivity.this,
                                 mensaje,
@@ -95,7 +135,6 @@ public class AdminProductosActivity extends AppCompatActivity {
         );
     }
 
-    // Consultar los productos registrados.
     private void cargarProductos() {
 
         progressBar.setVisibility(View.VISIBLE);
@@ -138,7 +177,6 @@ public class AdminProductosActivity extends AppCompatActivity {
         );
     }
 
-    // Construir visualmente cada producto.
     private void agregarFilaProducto(Producto producto) {
 
         LinearLayout fila = new LinearLayout(this);
@@ -221,7 +259,6 @@ public class AdminProductosActivity extends AppCompatActivity {
     private String obtenerNombreCategoria(String categoriaId) {
 
         for (Categoria categoria : categorias) {
-
             if (categoria.getId().equals(categoriaId)) {
                 return categoria.getNombre();
             }
@@ -230,7 +267,6 @@ public class AdminProductosActivity extends AppCompatActivity {
         return "Categoría no encontrada";
     }
 
-    // Formulario para crear o editar un producto.
     private void mostrarDialogoProducto(Producto producto) {
 
         if (categorias.isEmpty()) {
@@ -241,6 +277,9 @@ public class AdminProductosActivity extends AppCompatActivity {
             ).show();
             return;
         }
+
+        imagenSeleccionada = null;
+        tvEstadoImagen = null;
 
         boolean esEdicion = producto != null;
 
@@ -269,8 +308,19 @@ public class AdminProductosActivity extends AppCompatActivity {
         );
 
         EditText etImagenUrl = new EditText(this);
-        etImagenUrl.setHint("URL de la imagen (opcional)");
+        etImagenUrl.setHint("URL de imagen (opcional)");
         etImagenUrl.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+
+        Button btnSeleccionarImagen = new Button(this);
+        btnSeleccionarImagen.setText("Seleccionar imagen del teléfono");
+
+        tvEstadoImagen = new TextView(this);
+        tvEstadoImagen.setText("No has seleccionado una imagen.");
+        tvEstadoImagen.setTextSize(13);
+
+        btnSeleccionarImagen.setOnClickListener(v ->
+                selectorImagen.launch("image/*")
+        );
 
         TextView tvCategoria = new TextView(this);
         tvCategoria.setText("Selecciona una categoría");
@@ -306,6 +356,8 @@ public class AdminProductosActivity extends AppCompatActivity {
         formulario.addView(etPrecio);
         formulario.addView(tvCategoria);
         formulario.addView(spinnerCategorias);
+        formulario.addView(btnSeleccionarImagen);
+        formulario.addView(tvEstadoImagen);
         formulario.addView(etImagenUrl);
         formulario.addView(cbDisponible);
 
@@ -338,124 +390,181 @@ public class AdminProductosActivity extends AppCompatActivity {
                 .setTitle(esEdicion ? "Editar producto" : "Nuevo producto")
                 .setView(formulario)
                 .setNegativeButton("Cancelar", null)
-                .setPositiveButton(
-                        esEdicion ? "Guardar" : "Crear",
-                        null
-                )
+                .setPositiveButton(esEdicion ? "Guardar" : "Crear", null)
                 .create();
 
         dialogo.setOnShowListener(dialog -> {
 
-            dialogo.getButton(AlertDialog.BUTTON_POSITIVE)
-                    .setOnClickListener(v -> {
+            Button btnGuardar = dialogo.getButton(
+                    AlertDialog.BUTTON_POSITIVE
+            );
 
-                        String nombre = etNombre.getText()
-                                .toString().trim();
+            btnGuardar.setOnClickListener(v -> {
 
-                        String descripcion = etDescripcion.getText()
-                                .toString().trim();
+                String nombre = etNombre.getText().toString().trim();
+                String descripcion = etDescripcion.getText().toString().trim();
+                String precioTexto = etPrecio.getText().toString().trim();
+                String imagenUrl = etImagenUrl.getText().toString().trim();
 
-                        String precioTexto = etPrecio.getText()
-                                .toString().trim();
+                if (nombre.isEmpty()) {
+                    etNombre.setError("El nombre es obligatorio.");
+                    return;
+                }
 
-                        String imagenUrl = etImagenUrl.getText()
-                                .toString().trim();
+                if (precioTexto.isEmpty()) {
+                    etPrecio.setError("El precio es obligatorio.");
+                    return;
+                }
 
-                        if (nombre.isEmpty()) {
-                            etNombre.setError("El nombre es obligatorio.");
-                            return;
-                        }
+                int precioCentavos;
 
-                        if (precioTexto.isEmpty()) {
-                            etPrecio.setError("El precio es obligatorio.");
-                            return;
-                        }
+                try {
 
-                        int precioCentavos;
+                    BigDecimal precio = new BigDecimal(precioTexto);
 
-                        try {
+                    if (precio.compareTo(BigDecimal.ZERO) <= 0) {
+                        etPrecio.setError(
+                                "El precio debe ser mayor que cero."
+                        );
+                        return;
+                    }
 
-                            BigDecimal precio = new BigDecimal(precioTexto);
+                    if (precio.scale() > 2) {
+                        etPrecio.setError(
+                                "Utiliza máximo dos decimales."
+                        );
+                        return;
+                    }
 
-                            if (precio.compareTo(BigDecimal.ZERO) <= 0) {
-                                etPrecio.setError(
-                                        "El precio debe ser mayor que cero."
-                                );
-                                return;
-                            }
+                    precioCentavos = precio
+                            .movePointRight(2)
+                            .setScale(0, RoundingMode.UNNECESSARY)
+                            .intValueExact();
 
-                            if (precio.scale() > 2) {
-                                etPrecio.setError(
-                                        "Utiliza máximo dos decimales."
-                                );
-                                return;
-                            }
+                } catch (NumberFormatException |
+                         ArithmeticException error) {
 
-                            precioCentavos = precio
-                                    .movePointRight(2)
-                                    .setScale(0, RoundingMode.UNNECESSARY)
-                                    .intValueExact();
+                    etPrecio.setError("Ingresa un precio válido.");
+                    return;
+                }
 
-                        } catch (NumberFormatException |
-                                 ArithmeticException error) {
+                int posicion = spinnerCategorias.getSelectedItemPosition();
 
-                            etPrecio.setError("Ingresa un precio válido.");
-                            return;
-                        }
+                if (posicion < 0 || posicion >= categorias.size()) {
+                    Toast.makeText(
+                            this,
+                            "Selecciona una categoría válida.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                    return;
+                }
 
-                        int posicion = spinnerCategorias
-                                .getSelectedItemPosition();
+                String categoriaId = categorias.get(posicion).getId();
 
-                        if (posicion < 0 || posicion >= categorias.size()) {
-                            Toast.makeText(
-                                    this,
-                                    "Selecciona una categoría válida.",
-                                    Toast.LENGTH_SHORT
-                            ).show();
-                            return;
-                        }
+                Producto nuevoProducto;
 
-                        String categoriaId = categorias
-                                .get(posicion)
-                                .getId();
+                if (esEdicion) {
 
-                        Producto nuevoProducto;
+                    nuevoProducto = producto;
+                    nuevoProducto.setNombre(nombre);
+                    nuevoProducto.setDescripcion(descripcion);
+                    nuevoProducto.setPrecioCentavos(precioCentavos);
+                    nuevoProducto.setCategoriaId(categoriaId);
+                    nuevoProducto.setDisponible(cbDisponible.isChecked());
 
-                        if (esEdicion) {
+                } else {
 
-                            nuevoProducto = producto;
-                            nuevoProducto.setNombre(nombre);
-                            nuevoProducto.setDescripcion(descripcion);
-                            nuevoProducto.setPrecioCentavos(precioCentavos);
-                            nuevoProducto.setCategoriaId(categoriaId);
-                            nuevoProducto.setImagenUrl(imagenUrl);
-                            nuevoProducto.setDisponible(
-                                    cbDisponible.isChecked()
-                            );
+                    nuevoProducto = new Producto(
+                            null,
+                            nombre,
+                            precioCentavos,
+                            descripcion,
+                            categoriaId,
+                            imagenUrl,
+                            cbDisponible.isChecked()
+                    );
+                }
 
-                        } else {
+                // Si se eligió una imagen nueva, su URL reemplaza la anterior.
+                // Si no, se conserva la URL escrita o la que ya tenía el producto.
+                nuevoProducto.setImagenUrl(imagenUrl);
 
-                            nuevoProducto = new Producto(
-                                    null,
-                                    nombre,
-                                    precioCentavos,
-                                    descripcion,
-                                    categoriaId,
-                                    imagenUrl,
-                                    cbDisponible.isChecked()
-                            );
-                        }
-
-                        guardarProducto(nuevoProducto, esEdicion);
-                        dialogo.dismiss();
-                    });
+                guardarProducto(
+                        nuevoProducto,
+                        esEdicion,
+                        dialogo,
+                        btnGuardar
+                );
+            });
         });
 
         dialogo.show();
     }
 
-    // Crear o actualizar mediante ProductoRepository.
-    private void guardarProducto(Producto producto, boolean esEdicion) {
+    private void guardarProducto(
+            Producto producto,
+            boolean esEdicion,
+            AlertDialog dialogo,
+            Button btnGuardar
+    ) {
+
+        btnGuardar.setEnabled(false);
+
+        if (imagenSeleccionada != null) {
+
+            btnGuardar.setText("Subiendo imagen...");
+
+            subirImagenCloudinary(imagenSeleccionada,
+                    new SubidaImagenCallback() {
+
+                        @Override
+                        public void onSuccess(String urlImagen) {
+
+                            producto.setImagenUrl(urlImagen);
+
+                            guardarEnFirestore(
+                                    producto,
+                                    esEdicion,
+                                    dialogo,
+                                    btnGuardar
+                            );
+                        }
+
+                        @Override
+                        public void onError(String mensaje) {
+
+                            btnGuardar.setEnabled(true);
+                            btnGuardar.setText(
+                                    esEdicion ? "Guardar" : "Crear"
+                            );
+
+                            Toast.makeText(
+                                    AdminProductosActivity.this,
+                                    mensaje,
+                                    Toast.LENGTH_LONG
+                            ).show();
+                        }
+                    });
+
+        } else {
+
+            guardarEnFirestore(
+                    producto,
+                    esEdicion,
+                    dialogo,
+                    btnGuardar
+            );
+        }
+    }
+
+    private void guardarEnFirestore(
+            Producto producto,
+            boolean esEdicion,
+            AlertDialog dialogo,
+            Button btnGuardar
+    ) {
+
+        btnGuardar.setText("Guardando...");
 
         ProductoRepository.ProductoCallback callback =
                 new ProductoRepository.ProductoCallback() {
@@ -471,11 +580,17 @@ public class AdminProductosActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT
                         ).show();
 
+                        dialogo.dismiss();
                         cargarProductos();
                     }
 
                     @Override
                     public void onError(String mensaje) {
+
+                        btnGuardar.setEnabled(true);
+                        btnGuardar.setText(
+                                esEdicion ? "Guardar" : "Crear"
+                        );
 
                         Toast.makeText(
                                 AdminProductosActivity.this,
@@ -492,7 +607,178 @@ public class AdminProductosActivity extends AppCompatActivity {
         }
     }
 
-    // Confirmar antes de eliminar.
+    private interface SubidaImagenCallback {
+        void onSuccess(String urlImagen);
+        void onError(String mensaje);
+    }
+
+    private void subirImagenCloudinary(
+            Uri imagenUri,
+            SubidaImagenCallback callback
+    ) {
+
+        executor.execute(() -> {
+
+            HttpURLConnection conexion = null;
+
+            try {
+
+                String boundary = "----MunchlyBoundary" +
+                        System.currentTimeMillis();
+
+                URL url = new URL(
+                        "https://api.cloudinary.com/v1_1/" +
+                                CLOUD_NAME +
+                                "/image/upload"
+                );
+
+                conexion = (HttpURLConnection) url.openConnection();
+                conexion.setRequestMethod("POST");
+                conexion.setDoOutput(true);
+                conexion.setConnectTimeout(15000);
+                conexion.setReadTimeout(30000);
+                conexion.setRequestProperty(
+                        "Content-Type",
+                        "multipart/form-data; boundary=" + boundary
+                );
+
+                conexion.setChunkedStreamingMode(8192);
+
+                try (DataOutputStream salida =
+                             new DataOutputStream(conexion.getOutputStream())) {
+
+                    escribirCampo(
+                            salida,
+                            boundary,
+                            "upload_preset",
+                            UPLOAD_PRESET
+                    );
+
+                    String tipoMime = getContentResolver()
+                            .getType(imagenUri);
+
+                    if (tipoMime == null ||
+                            !tipoMime.startsWith("image/")) {
+                        tipoMime = "image/jpeg";
+                    }
+
+                    salida.writeBytes("--" + boundary + "\r\n");
+                    salida.writeBytes(
+                            "Content-Disposition: form-data; " +
+                                    "name=\"file\"; filename=\"producto\"\r\n"
+                    );
+                    salida.writeBytes(
+                            "Content-Type: " + tipoMime + "\r\n\r\n"
+                    );
+
+                    try (InputStream entrada =
+                                 getContentResolver()
+                                         .openInputStream(imagenUri)) {
+
+                        if (entrada == null) {
+                            throw new Exception(
+                                    "No se pudo leer la imagen seleccionada."
+                            );
+                        }
+
+                        byte[] buffer = new byte[8192];
+                        int cantidad;
+
+                        while ((cantidad = entrada.read(buffer)) != -1) {
+                            salida.write(buffer, 0, cantidad);
+                        }
+                    }
+
+                    salida.writeBytes("\r\n");
+                    salida.writeBytes("--" + boundary + "--\r\n");
+                    salida.flush();
+                }
+
+                int codigo = conexion.getResponseCode();
+
+                InputStream respuestaStream =
+                        codigo >= 200 && codigo < 300
+                                ? conexion.getInputStream()
+                                : conexion.getErrorStream();
+
+                StringBuilder respuesta = new StringBuilder();
+
+                try (BufferedReader lector = new BufferedReader(
+                        new InputStreamReader(
+                                respuestaStream,
+                                StandardCharsets.UTF_8
+                        ))) {
+
+                    String linea;
+
+                    while ((linea = lector.readLine()) != null) {
+                        respuesta.append(linea);
+                    }
+                }
+
+                JSONObject json = new JSONObject(respuesta.toString());
+
+                if (codigo >= 200 && codigo < 300) {
+
+                    String secureUrl = json.optString("secure_url", "");
+
+                    if (secureUrl.isEmpty()) {
+                        throw new Exception(
+                                "Cloudinary no devolvió la URL de la imagen."
+                        );
+                    }
+
+                    runOnUiThread(() ->
+                            callback.onSuccess(secureUrl)
+                    );
+
+                } else {
+
+                    String mensaje = json.optString(
+                            "error",
+                            "No se pudo subir la imagen."
+                    );
+
+                    runOnUiThread(() ->
+                            callback.onError(mensaje)
+                    );
+                }
+
+            } catch (Exception error) {
+
+                String mensaje = error.getMessage() != null
+                        ? error.getMessage()
+                        : "Error al subir la imagen.";
+
+                runOnUiThread(() ->
+                        callback.onError(mensaje)
+                );
+
+            } finally {
+
+                if (conexion != null) {
+                    conexion.disconnect();
+                }
+            }
+        });
+    }
+
+    private void escribirCampo(
+            DataOutputStream salida,
+            String boundary,
+            String nombre,
+            String valor
+    ) throws Exception {
+
+        salida.writeBytes("--" + boundary + "\r\n");
+        salida.writeBytes(
+                "Content-Disposition: form-data; name=\"" +
+                        nombre + "\"\r\n\r\n"
+        );
+        salida.write(valor.getBytes(StandardCharsets.UTF_8));
+        salida.writeBytes("\r\n");
+    }
+
     private void confirmarEliminar(Producto producto) {
 
         new AlertDialog.Builder(this)
