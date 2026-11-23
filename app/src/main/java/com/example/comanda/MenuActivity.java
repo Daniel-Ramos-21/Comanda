@@ -441,32 +441,40 @@ public class MenuActivity extends AppCompatActivity {
 
     private void poblarCategorias(List<Categoria> categoriasRemotas) {
         listaCategorias.clear();
+
         listaCategorias.add(new Categoria(
                 "todos",
                 getString(R.string.category_all),
-                "Todos los platillos"
+                "Todos los productos"
         ));
 
-        if (categoriasRemotas != null && !categoriasRemotas.isEmpty()) {
-            listaCategorias.addAll(categoriasRemotas);
-        } else {
-            listaCategorias.add(new Categoria(
-                    "cat_desayunos",
-                    getString(R.string.category_breakfast),
-                    "Desayunos"
-            ));
-            listaCategorias.add(new Categoria(
-                    "cat_almuerzos",
-                    getString(R.string.category_lunch),
-                    "Almuerzos"
-            ));
-            listaCategorias.add(new Categoria(
-                    "cat_bebidas",
-                    getString(R.string.category_drinks),
-                    "Bebidas"
-            ));
+        if (categoriasRemotas != null) {
+            for (Categoria categoria : categoriasRemotas) {
+                if (categoria != null &&
+                        categoria.getId() != null &&
+                        !categoria.getId().trim().isEmpty() &&
+                        categoria.getNombre() != null &&
+                        !categoria.getNombre().trim().isEmpty()) {
+
+                    listaCategorias.add(categoria);
+                }
+            }
         }
 
+        boolean categoriaExiste = "todos".equals(categoriaSeleccionadaId);
+
+        for (Categoria categoria : listaCategorias) {
+            if (categoria.getId().equals(categoriaSeleccionadaId)) {
+                categoriaExiste = true;
+                break;
+            }
+        }
+
+        if (!categoriaExiste) {
+            categoriaSeleccionadaId = "todos";
+        }
+
+        categoriaAdapter.setPosicionSeleccionada(0);
         categoriaAdapter.notifyDataSetChanged();
     }
 
@@ -519,12 +527,11 @@ public class MenuActivity extends AppCompatActivity {
         for (Producto p : listaProductosOriginal) {
 
             // 1. Filtro por categoría
-            if (!"todos".equalsIgnoreCase(categoriaSeleccionadaId)) {
-                String catId = p.getCategoriaId() != null
-                        ? p.getCategoriaId().toLowerCase()
-                        : "";
+            if (!"todos".equals(categoriaSeleccionadaId)) {
+                String catId = p.getCategoriaId();
 
-                if (!catId.contains(categoriaSeleccionadaId.toLowerCase())) {
+                if (catId == null ||
+                        !catId.equals(categoriaSeleccionadaId)) {
                     continue;
                 }
             }

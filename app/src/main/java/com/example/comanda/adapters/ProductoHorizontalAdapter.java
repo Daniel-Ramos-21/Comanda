@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.comanda.R;
 import com.example.comanda.models.Producto;
 
@@ -24,12 +25,14 @@ public class ProductoHorizontalAdapter extends RecyclerView.Adapter<ProductoHori
     private List<Producto> productos;
     private final OnProductoClickListener listener;
 
-    public ProductoHorizontalAdapter(List<Producto> productos, OnProductoClickListener listener) {
+    public ProductoHorizontalAdapter(
+            List<Producto> productos,
+            OnProductoClickListener listener
+    ) {
         this.productos = productos;
         this.listener = listener;
     }
 
-    @android.annotation.SuppressLint("NotifyDataSetChanged")
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
         notifyDataSetChanged();
@@ -37,42 +40,84 @@ public class ProductoHorizontalAdapter extends RecyclerView.Adapter<ProductoHori
 
     @NonNull
     @Override
-    public ProductoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
+    public ProductoViewHolder onCreateViewHolder(
+            @NonNull ViewGroup parent,
+            int viewType
+    ) {
+        View vista = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_producto_horizontal, parent, false);
-        return new ProductoViewHolder(v);
+
+        return new ProductoViewHolder(vista);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
-        Producto p = productos.get(position);
-        holder.tvNombre.setText(p.getNombre());
-        holder.tvDescripcion.setText(p.getDescripcion());
+    public void onBindViewHolder(
+            @NonNull ProductoViewHolder holder,
+            int position
+    ) {
+        Producto producto = productos.get(position);
 
-        double precioDolares = p.getPrecioCentavos() / 100.0;
-        holder.tvPrecio.setText(String.format(Locale.US, "$%.2f", precioDolares));
+        holder.tvNombre.setText(producto.getNombre());
+        holder.tvDescripcion.setText(producto.getDescripcion());
 
-        // Asignación de recurso visual según categoría o identificador
-        asignarImagen(holder.ivProducto, p);
+        double precio = producto.getPrecioCentavos() / 100.0;
+
+        holder.tvPrecio.setText(
+                String.format(Locale.US, "$%.2f", precio)
+        );
+
+        asignarImagen(holder.ivProducto, producto);
 
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
-                listener.onProductoClick(p);
+                listener.onProductoClick(producto);
             }
         });
     }
 
-    private void asignarImagen(ImageView iv, Producto p) {
-        String nombre = p.getNombre() != null ? p.getNombre().toLowerCase() : "";
-        if (nombre.contains("pupusa")) {
-            iv.setImageResource(R.drawable.ic_food_pupusas);
-        } else if (nombre.contains("horchata") || nombre.contains("bebida") || nombre.contains("jugo")) {
-            iv.setImageResource(R.drawable.ic_food_horchata);
-        } else if (nombre.contains("taco")) {
-            iv.setImageResource(R.drawable.ic_food_tacos);
-        } else {
-            iv.setImageResource(R.drawable.ic_food_horchata);
+    private void asignarImagen(ImageView imagen, Producto producto) {
+
+        int imagenRespaldo = obtenerImagenRespaldo(producto);
+
+        String imagenUrl = producto.getImagenUrl();
+
+        if (imagenUrl == null ||
+                imagenUrl.trim().isEmpty() ||
+                !imagenUrl.startsWith("https://")) {
+
+            imagen.setImageResource(imagenRespaldo);
+            return;
         }
+
+        Glide.with(imagen.getContext())
+                .load(imagenUrl)
+                .placeholder(imagenRespaldo)
+                .error(imagenRespaldo)
+                .centerCrop()
+                .into(imagen);
+    }
+
+    private int obtenerImagenRespaldo(Producto producto) {
+
+        String nombre = producto.getNombre() != null
+                ? producto.getNombre().toLowerCase(Locale.ROOT)
+                : "";
+
+        if (nombre.contains("pupusa")) {
+            return R.drawable.ic_food_pupusas;
+        }
+
+        if (nombre.contains("horchata") ||
+                nombre.contains("bebida") ||
+                nombre.contains("jugo")) {
+            return R.drawable.ic_food_horchata;
+        }
+
+        if (nombre.contains("taco")) {
+            return R.drawable.ic_food_tacos;
+        }
+
+        return R.drawable.ic_food_horchata;
     }
 
     @Override
@@ -81,6 +126,7 @@ public class ProductoHorizontalAdapter extends RecyclerView.Adapter<ProductoHori
     }
 
     public static class ProductoViewHolder extends RecyclerView.ViewHolder {
+
         final ImageView ivProducto;
         final TextView tvNombre;
         final TextView tvDescripcion;
@@ -88,6 +134,7 @@ public class ProductoHorizontalAdapter extends RecyclerView.Adapter<ProductoHori
 
         ProductoViewHolder(@NonNull View itemView) {
             super(itemView);
+
             ivProducto = itemView.findViewById(R.id.ivProductoHorizontal);
             tvNombre = itemView.findViewById(R.id.tvNombreHorizontal);
             tvDescripcion = itemView.findViewById(R.id.tvDescripcionHorizontal);
