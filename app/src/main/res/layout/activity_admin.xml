@@ -33,4 +33,15 @@
         android:backgroundTint="#F28C28"
         android:textColor="#FFFFFF" />
 
+    <Button
+        android:id="@+id/btnProductos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Administrar productos"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:backgroundTint="#F28C28"
+        android:textColor="#FFFFFF" />
+
 </LinearLayout>
