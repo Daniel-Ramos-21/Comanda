@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -36,6 +37,7 @@ import com.example.comanda.models.FiltroModel;
 import com.example.comanda.models.Producto;
 import com.example.comanda.Data.UsuarioRepository;
 import com.example.comanda.models.Usuario;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,8 +89,9 @@ public class MenuActivity extends AppCompatActivity {
 
     private String categoriaSeleccionadaId = "todos";
     private FiltroModel filtroModelActual = new FiltroModel();
-
+    private Button btnPanelAdmin;
     private TextView tvGreetingTitle;
+
     private UsuarioRepository usuarioRepository;
 
     private final ActivityResultLauncher<Intent> launcherFiltros = registerForActivityResult(
@@ -209,6 +212,7 @@ public class MenuActivity extends AppCompatActivity {
         btnNavPerfil = findViewById(R.id.btnNavPerfil);
         btnNotificaciones = findViewById(R.id.ivNotificaciones);
         tvGreetingTitle = findViewById(R.id.tvGreetingTitle);
+        btnPanelAdmin = findViewById(R.id.btnPanelAdmin);
     }
 
     private void setupRecyclerViews() {
@@ -332,6 +336,15 @@ public class MenuActivity extends AppCompatActivity {
                         "No tienes notificaciones pendientes",
                         Toast.LENGTH_SHORT
                 ).show());
+
+        //Panel Admin
+        btnPanelAdmin.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    MenuActivity.this,
+                    AdminActivity.class
+            );
+            startActivity(intent);
+        });
     }
 
     private void cargarSaludo(){
@@ -363,6 +376,7 @@ public class MenuActivity extends AppCompatActivity {
         super.onResume();
         if (usuarioRepository != null && tvGreetingTitle != null){
             cargarSaludo();
+            verificarAccesoAdmin();
         }
     }
 
@@ -597,5 +611,33 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DetalleProductoActivity.class);
         intent.putExtra(DetalleProductoActivity.EXTRA_PRODUCTO, p);
         startActivity(intent);
+    }
+    private void verificarAccesoAdmin() {
+
+        btnPanelAdmin.setVisibility(View.GONE);
+
+        if (!usuarioRepository.haySesionActiva()) {
+            return;
+        }
+
+        usuarioRepository.comprobarAdministrador(
+                new UsuarioRepository.RolCallback() {
+
+                    @Override
+                    public void onSuccess(boolean esAdministrador) {
+
+                        if (esAdministrador) {
+                            btnPanelAdmin.setVisibility(View.VISIBLE);
+                        } else {
+                            btnPanelAdmin.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onError(String mensaje) {
+                        btnPanelAdmin.setVisibility(View.GONE);
+                    }
+                }
+        );
     }
 }

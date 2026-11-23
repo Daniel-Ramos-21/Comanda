@@ -13,9 +13,9 @@ public class AdminActivity extends  AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_categorias);
+        setContentView(R.layout.activity_admin);
 
-        btnCategorias = findViewById(R.id.btnAgregarCategoria);
+        btnCategorias = findViewById(R.id.btnCategorias);
 
         btnCategorias.setOnClickListener(v -> {
             Intent intent = new Intent(

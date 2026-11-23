@@ -24,6 +24,12 @@ public class UsuarioRepository {
         void onError(String mensaje);
     }
 
+    // Callback para comprobar el rol
+    public interface RolCallback {
+        void onSuccess(boolean esAdministrador);
+        void onError(String mensaje);
+    }
+
     public UsuarioRepository() {
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -58,7 +64,8 @@ public class UsuarioRepository {
                             nombre,
                             correo,
                             telefono,
-                            new Date()
+                            new Date(),
+                            "cliente"
                     );
 
                     db.collection("usuarios")
@@ -121,7 +128,6 @@ public class UsuarioRepository {
                 });
     }
 
-
     // Cerrar sesión
     public void cerrarSesion() {
         auth.signOut();
@@ -183,6 +189,41 @@ public class UsuarioRepository {
                 );
     }
 
+    // Comprobar si el usuario autenticado es administrador
+    public void comprobarAdministrador(RolCallback callback) {
+
+        String uid = obtenerUID();
+
+        if (uid == null) {
+            callback.onError("No hay una sesión activa.");
+            return;
+        }
+
+        db.collection("usuarios")
+                .document(uid)
+                .get()
+                .addOnSuccessListener(document -> {
+
+                    if (!document.exists()) {
+                        callback.onError("No se encontró el perfil del usuario.");
+                        return;
+                    }
+
+                    String rol = document.getString("rol");
+
+                    boolean esAdministrador = rol != null
+                            && rol.equalsIgnoreCase("admin");
+
+                    callback.onSuccess(esAdministrador);
+                })
+                .addOnFailureListener(error ->
+                        callback.onError(
+                                "No se pudo comprobar el rol: "
+                                        + error.getMessage()
+                        )
+                );
+    }
+
     // Actualizar perfil en Firestore
     public void actualizarPerfil(Usuario usuario,
                                  PerfilCallback callback) {
@@ -197,9 +238,15 @@ public class UsuarioRepository {
         // Garantizar que el perfil pertenece al usuario actual
         usuario.setUID(uid);
 
+        // Actualizar únicamente los datos del perfil
+        // sin modificar el rol ni otros campos del documento
         db.collection("usuarios")
                 .document(uid)
-                .set(usuario)
+                .update(
+                        "nombre", usuario.getNombre(),
+                        "correo", usuario.getCorreo(),
+                        "telefono", usuario.getTelefono()
+                )
                 .addOnSuccessListener(unused ->
                         callback.onSuccess(usuario)
                 )
