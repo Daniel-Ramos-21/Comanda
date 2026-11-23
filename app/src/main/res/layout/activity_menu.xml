@@ -91,8 +91,6 @@
                 android:textSize="@dimen/text_size_greeting"
                 android:textStyle="bold" />
 
-
-
             <TextView
                 android:id="@+id/tvGreetingSubtitle"
                 android:layout_width="match_parent"
@@ -103,66 +101,18 @@
                 android:textColor="@color/munchly_text_secondary"
                 android:textSize="@dimen/text_size_greeting_sub" />
 
+            <!-- Acceso al panel de administración -->
             <Button
                 android:id="@+id/btnPanelAdmin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="Panel de administración"
-                android:visibility="gone" />
-
-
-
-            <!-- Búsqueda -->
-            <LinearLayout
-                android:id="@+id/searchBarContainer"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
-                android:background="@drawable/bg_search_bar"
-                android:elevation="1dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/spacing_medium"
-                android:paddingEnd="@dimen/spacing_small">
+                android:text="Panel de administración"
+                android:visibility="gone"
+                android:backgroundTint="@color/munchly_primary"
+                android:textColor="@color/white" />
 
-                <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:contentDescription="@string/search_placeholder"
-                    android:src="@drawable/ic_search" />
-
-                <EditText
-                    android:id="@+id/etBuscarMenu"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/spacing_small"
-                    android:layout_marginEnd="@dimen/spacing_small"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:fontFamily="sans-serif"
-                    android:hint="@string/search_placeholder"
-                    android:imeOptions="actionSearch"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:textColor="@color/munchly_text_primary"
-                    android:textColorHint="@color/munchly_text_secondary"
-                    android:textSize="14sp" />
-
-                <ImageView
-                    android:id="@+id/btnAbrirFiltros"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/bg_chip_unselected"
-                    android:clickable="true"
-                    android:contentDescription="@string/cd_filter_button"
-                    android:focusable="true"
-                    android:padding="9dp"
-                    android:src="@drawable/ic_filter" />
-            </LinearLayout>
-
-            <!-- Indicador de filtros -->
+            <!-- Indicador de filtros activos -->
             <LinearLayout
                 android:id="@+id/layoutIndicadorFiltroActivo"
                 android:layout_width="match_parent"
@@ -219,24 +169,19 @@
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-            <!-- Favoritos de la casa -->
+            <!-- Favorito de la casa: oculto -->
             <TextView
                 android:id="@+id/tvTituloFavoritos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/section_house_favorites"
-                android:textColor="@color/munchly_text_primary"
-                android:textSize="@dimen/text_size_section"
-                android:textStyle="bold" />
+                android:visibility="gone"
+                android:text="@string/section_house_favorites" />
 
-            <!-- Tarjeta favorita -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardFavoritoCasa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small"
+                android:visibility="gone"
                 android:clickable="true"
                 android:focusable="true"
                 app:cardBackgroundColor="@color/munchly_surface"
@@ -270,8 +215,6 @@
                             android:layout_gravity="top|end"
                             android:layout_margin="@dimen/spacing_small"
                             android:background="@drawable/bg_badge_more_ordered"
-                            android:fontFamily="sans-serif-medium"
-                            android:letterSpacing="0.02"
                             android:text="@string/badge_most_ordered"
                             android:textColor="@color/white"
                             android:textSize="12sp"
@@ -287,34 +230,17 @@
                         <TextView
                             android:id="@+id/tvFavoritoNombre"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-medium"
-                            android:textColor="@color/munchly_text_primary"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            tools:text="Pupusas de Queso y Loroco" />
+                            android:layout_height="wrap_content" />
 
                         <TextView
                             android:id="@+id/tvFavoritoDescripcion"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="sans-serif"
-                            android:lineSpacingMultiplier="1.15"
-                            android:textColor="@color/munchly_text_secondary"
-                            android:textSize="13sp"
-                            tools:text="Tradicionales pupusas hechas a mano con masa de maíz artesanal, queso fundido y flor de loroco fresca. Acompañadas de curtido y salsa." />
+                            android:layout_height="wrap_content" />
 
                         <TextView
                             android:id="@+id/tvFavoritoPrecio"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/spacing_small"
-                            android:fontFamily="sans-serif-medium"
-                            android:textColor="@color/munchly_accent"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            tools:text="$3.50" />
+                            android:layout_height="wrap_content" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -473,34 +399,6 @@
                 android:textSize="11sp" />
         </LinearLayout>
 
-        <!-- Pedidos -->
-        <LinearLayout
-            android:id="@+id/btnNavPedidos"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:contentDescription="@string/nav_orders"
-                android:src="@drawable/ic_nav_orders" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:fontFamily="sans-serif"
-                android:text="@string/nav_orders"
-                android:textColor="@color/munchly_nav_inactive"
-                android:textSize="11sp" />
-        </LinearLayout>
-
         <!-- Perfil -->
         <LinearLayout
             android:id="@+id/btnNavPerfil"
@@ -525,6 +423,34 @@
                 android:layout_marginTop="2dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/nav_profile"
+                android:textColor="@color/munchly_nav_inactive"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Pedidos -->
+        <LinearLayout
+            android:id="@+id/btnNavPedidos"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:contentDescription="@string/nav_orders"
+                android:src="@drawable/ic_nav_orders" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/nav_orders"
                 android:textColor="@color/munchly_nav_inactive"
                 android:textSize="11sp" />
         </LinearLayout>
