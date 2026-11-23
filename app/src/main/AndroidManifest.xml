@@ -60,6 +60,18 @@
         <activity android:name=".RegistroActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"/>
+
+        <activity
+            android:name=".AdminCategoriasActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AdminActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AdminCategoriasActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
