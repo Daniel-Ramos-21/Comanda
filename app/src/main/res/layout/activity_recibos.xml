@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/recibosRoot"
@@ -37,9 +38,10 @@
             android:text="@string/receipts_subtitle"
             android:textColor="@color/munchly_text_secondary"
             android:textSize="13sp" />
+
     </LinearLayout>
 
-    <!-- Lista de Recibos con Scroll -->
+    <!-- Lista dinámica de recibos -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -59,309 +61,41 @@
             android:paddingEnd="20dp"
             android:paddingBottom="24dp">
 
-            <!-- Orden 1: #MN-2401 -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardOrden2401"
+            <!-- Indicador de carga -->
+            <ProgressBar
+                android:id="@+id/progressRecibos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="32dp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <!-- Mensaje de lista vacía o error -->
+            <TextView
+                android:id="@+id/tvEstadoRecibos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="14dp"
-                android:clickable="true"
-                android:focusable="true"
-                app:cardBackgroundColor="@color/munchly_surface"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/munchly_border"
-                app:strokeWidth="1dp">
+                android:gravity="center"
+                android:padding="24dp"
+                android:text="Aquí aparecerán tus pedidos."
+                android:textColor="@color/munchly_text_secondary"
+                android:textSize="14sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="18dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-black"
-                            android:text="Orden #MN-2401"
-                            android:textColor="@color/munchly_primary"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:fontFamily="sans-serif"
-                            android:text="Hoy, 2:30 PM"
-                            android:textColor="@color/munchly_text_secondary"
-                            android:textSize="12sp" />
-                    </RelativeLayout>
-
-                    <!-- Badge de estado: Entregado -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_chip_unselected"
-                        android:fontFamily="sans-serif-medium"
-                        android:paddingStart="10dp"
-                        android:paddingTop="3dp"
-                        android:paddingEnd="10dp"
-                        android:paddingBottom="3dp"
-                        android:text="● Entregado"
-                        android:textColor="@color/munchly_primary"
-                        android:textSize="11sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="sans-serif"
-                        android:text="2x Pupusas Mixtas, 1x Horchata Artesanal Morro"
-                        android:textColor="@color/munchly_text_secondary"
-                        android:textSize="13sp" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
-                        android:background="@color/munchly_border" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-black"
-                            android:text="Total: $12.50"
-                            android:textColor="@color/munchly_primary"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="@string/receipts_view_detail"
-                            android:textColor="@color/munchly_accent"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Orden 2: #MN-2398 -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardOrden2398"
+            <!-- Aquí Java agregará las tarjetas de cada pedido -->
+            <LinearLayout
+                android:id="@+id/layoutListaRecibos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="14dp"
-                android:clickable="true"
-                android:focusable="true"
-                app:cardBackgroundColor="@color/munchly_surface"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/munchly_border"
-                app:strokeWidth="1dp">
+                android:orientation="vertical" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="18dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-black"
-                            android:text="Orden #MN-2398"
-                            android:textColor="@color/munchly_primary"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:fontFamily="sans-serif"
-                            android:text="12 Nov, 8:15 PM"
-                            android:textColor="@color/munchly_text_secondary"
-                            android:textSize="12sp" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_chip_unselected"
-                        android:fontFamily="sans-serif-medium"
-                        android:paddingStart="10dp"
-                        android:paddingTop="3dp"
-                        android:paddingEnd="10dp"
-                        android:paddingBottom="3dp"
-                        android:text="● Entregado"
-                        android:textColor="@color/munchly_primary"
-                        android:textSize="11sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="sans-serif"
-                        android:text="1x Tacos de Birria con consomé, 1x Bebida Fría"
-                        android:textColor="@color/munchly_text_secondary"
-                        android:textSize="13sp" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
-                        android:background="@color/munchly_border" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-black"
-                            android:text="Total: $7.25"
-                            android:textColor="@color/munchly_primary"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="@string/receipts_view_detail"
-                            android:textColor="@color/munchly_accent"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Orden 3: #MN-2350 -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardOrden2350"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                app:cardBackgroundColor="@color/munchly_surface"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/munchly_border"
-                app:strokeWidth="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="18dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-black"
-                            android:text="Orden #MN-2350"
-                            android:textColor="@color/munchly_primary"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:fontFamily="sans-serif"
-                            android:text="5 Nov, 1:10 PM"
-                            android:textColor="@color/munchly_text_secondary"
-                            android:textSize="12sp" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_chip_unselected"
-                        android:fontFamily="sans-serif-medium"
-                        android:paddingStart="10dp"
-                        android:paddingTop="3dp"
-                        android:paddingEnd="10dp"
-                        android:paddingBottom="3dp"
-                        android:text="● Entregado"
-                        android:textColor="@color/munchly_primary"
-                        android:textSize="11sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="sans-serif"
-                        android:text="4x Pupusas Variadas, 2x Horchata Tradicional"
-                        android:textColor="@color/munchly_text_secondary"
-                        android:textSize="13sp" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
-                        android:background="@color/munchly_border" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-black"
-                            android:text="Total: $16.75"
-                            android:textColor="@color/munchly_primary"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="@string/receipts_view_detail"
-                            android:textColor="@color/munchly_accent"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Barra de navegación inferior (Recibos activa) -->
+    <!-- Barra de navegación inferior -->
     <LinearLayout
         android:id="@+id/bottomNavRecibos"
         android:layout_width="0dp"
@@ -401,6 +135,7 @@
                 android:text="@string/nav_home"
                 android:textColor="@color/munchly_nav_inactive"
                 android:textSize="11sp" />
+
         </LinearLayout>
 
         <!-- Buscar -->
@@ -430,6 +165,7 @@
                 android:text="@string/nav_search"
                 android:textColor="@color/munchly_nav_inactive"
                 android:textSize="11sp" />
+
         </LinearLayout>
 
         <!-- Carrito -->
@@ -449,7 +185,7 @@
                 android:layout_height="24dp"
                 android:contentDescription="@string/nav_cart"
                 android:src="@drawable/ic_nav_cart"
-                android:textColor="@color/munchly_nav_inactive" />
+                app:tint="@color/munchly_nav_inactive" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -489,9 +225,10 @@
                 android:text="@string/nav_account"
                 android:textColor="@color/munchly_nav_inactive"
                 android:textSize="11sp" />
+
         </LinearLayout>
 
-        <!-- Recibos (Activo) -->
+        <!-- Recibos activo -->
         <LinearLayout
             android:id="@+id/btnNavRecibos"
             android:layout_width="0dp"
@@ -516,7 +253,9 @@
                 android:textColor="@color/munchly_primary"
                 android:textSize="11sp"
                 android:textStyle="bold" />
+
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

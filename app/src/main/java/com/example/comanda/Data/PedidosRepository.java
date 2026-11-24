@@ -111,15 +111,14 @@ public class PedidosRepository {
                 .addOnFailureListener(callback::onError);
     }
 
+
     public void obtenerPedidos(OnPedidosCallback callback) {
 
         FirebaseUser usuario = auth.getCurrentUser();
 
         if (usuario == null) {
             callback.onError(
-                    new IllegalStateException(
-                            "No hay una sesión activa."
-                    )
+                    new IllegalStateException("No hay una sesión activa.")
             );
             return;
         }
@@ -128,34 +127,70 @@ public class PedidosRepository {
 
         db.collection("pedidos")
                 .whereEqualTo("usuarioId", uid)
-                .orderBy(
-                        "fechaCreacion",
-                        Query.Direction.DESCENDING
-                )
                 .get()
                 .addOnSuccessListener(snapshot -> {
 
                     List<Pedido> pedidos = new ArrayList<>();
 
+                    android.util.Log.d(
+                            "MUNCHLY_RECIBOS",
+                            "Documentos encontrados: " + snapshot.size()
+                    );
+
                     for (QueryDocumentSnapshot doc : snapshot) {
 
-                        Pedido pedido = doc.toObject(Pedido.class);
+                        try {
+                            Pedido pedido = doc.toObject(Pedido.class);
 
-                        if (pedido != null) {
-
-                            if (pedido.getId() == null
-                                    || pedido.getId().isEmpty()) {
+                            if (pedido.getId() == null ||
+                                    pedido.getId().isEmpty()) {
                                 pedido.setId(doc.getId());
                             }
 
                             pedidos.add(pedido);
+
+                        } catch (Exception e) {
+                            android.util.Log.e(
+                                    "MUNCHLY_RECIBOS",
+                                    "Error convirtiendo documento: " + doc.getId(),
+                                    e
+                            );
                         }
                     }
 
+                    // Ordenar por fecha, del más reciente al más antiguo.
+                    pedidos.sort((p1, p2) -> {
+
+                        Date fecha1 = p1.getFechaCreacion();
+                        Date fecha2 = p2.getFechaCreacion();
+
+                        if (fecha1 == null && fecha2 == null) return 0;
+                        if (fecha1 == null) return 1;
+                        if (fecha2 == null) return -1;
+
+                        return fecha2.compareTo(fecha1);
+                    });
+
+                    android.util.Log.d(
+                            "MUNCHLY_RECIBOS",
+                            "Pedidos cargados: " + pedidos.size()
+                    );
+
                     callback.onSuccess(pedidos);
+
                 })
-                .addOnFailureListener(callback::onError);
+                .addOnFailureListener(e -> {
+
+                    android.util.Log.e(
+                            "MUNCHLY_RECIBOS",
+                            "Error consultando Firestore",
+                            e
+                    );
+
+                    callback.onError(e);
+                });
     }
+
 
     public void actualizarEstado(
             String pedidoId,
