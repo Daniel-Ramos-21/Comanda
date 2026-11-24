@@ -47,6 +47,7 @@ public class BusquedaActivity extends AppCompatActivity {
     private MaterialButton btnExplorarMenu;
     private ChipGroup chipGroupRecientes;
     private TextView btnBorrarTodo;
+    private View btnNavCarrito;
 
     private ProductoVerticalAdapter adapter;
 
@@ -57,6 +58,7 @@ public class BusquedaActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth auth;
     private String uid;
+
 
     private static final int MAX_BUSQUEDAS = 10;
 
@@ -146,6 +148,7 @@ public class BusquedaActivity extends AppCompatActivity {
         btnBorrarTodo = findViewById(R.id.btnBorrarTodoRecientes);
 
         tvSinRecientes = findViewById(R.id.tvSinRecientes);
+        btnNavCarrito = findViewById(R.id.btnNavCarrito);
     }
 
     // --------------------------------------------------
@@ -286,6 +289,13 @@ public class BusquedaActivity extends AppCompatActivity {
             }
 
             return false;
+        });
+        btnNavCarrito.setOnClickListener(v-> {
+            Intent intent = new Intent(
+                    BusquedaActivity.this,
+                    CarritoActivity.class
+            );
+            startActivity(intent);
         });
 
         // Borrar todo el historial

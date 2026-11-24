@@ -23,6 +23,8 @@ public class CuentaActivity extends AppCompatActivity {
     private TextView tvCuentaNombre;
     private TextView tvCuentaCorreo;
     private TextView tvAvataarInitials;
+    private View btnNavCarrito;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class CuentaActivity extends AppCompatActivity {
         tvCuentaNombre = findViewById(R.id.tvCuentaNombre);
         tvCuentaCorreo = findViewById(R.id.tvCuentaCorreo);
         tvAvataarInitials = findViewById(R.id.tvAvatarInitials);
+        btnNavCarrito = findViewById(R.id.btnNavCarrito);
     }
 
     private void setupWindowInsets() {
@@ -146,6 +149,13 @@ public class CuentaActivity extends AppCompatActivity {
         findViewById(R.id.btnNavRecibos).setOnClickListener(v -> {
             startActivity(new Intent(this, RecibosActivity.class));
             finish();
+        });
+        btnNavCarrito.setOnClickListener(v-> {
+            Intent intent = new Intent(
+                    CuentaActivity.this,
+                    CarritoActivity.class
+            );
+            startActivity(intent);
         });
     }
 

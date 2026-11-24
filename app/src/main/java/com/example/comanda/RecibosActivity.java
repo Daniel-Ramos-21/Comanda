@@ -14,6 +14,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class RecibosActivity extends AppCompatActivity {
 
+    private View btnNavCarrito;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +82,11 @@ public class RecibosActivity extends AppCompatActivity {
 
         findViewById(R.id.btnNavCuenta).setOnClickListener(v -> {
             startActivity(new Intent(this, CuentaActivity.class));
+            finish();
+        });
+
+        findViewById(R.id.btnNavCarrito).setOnClickListener(v ->{
+            startActivity(new Intent(this, CarritoActivity.class));
             finish();
         });
     }

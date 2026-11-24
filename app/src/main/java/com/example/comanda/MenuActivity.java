@@ -48,6 +48,7 @@ public class MenuActivity extends AppCompatActivity {
     // Navegación inferior
     private View btnNavInicio;
     private View btnNavBuscar;
+    private View btnNavCarrito;
     private View btnNavPedidos;
     private View btnNavPerfil;
     private View btnNotificaciones;
@@ -177,6 +178,8 @@ public class MenuActivity extends AppCompatActivity {
         tvGreetingTitle = findViewById(R.id.tvGreetingTitle);
 
         btnPanelAdmin = findViewById(R.id.btnPanelAdmin);
+
+        btnNavCarrito = findViewById(R.id.btnNavCarrito);
     }
 
 
@@ -275,6 +278,14 @@ public class MenuActivity extends AppCompatActivity {
                             RecibosActivity.class
                     )
             );
+        });
+
+        btnNavCarrito.setOnClickListener(v-> {
+            Intent intent = new Intent(
+                    MenuActivity.this,
+                    CarritoActivity.class
+            );
+            startActivity(intent);
         });
 
 
@@ -609,9 +620,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-    // --------------------------------------------------
     // DETALLE DEL PRODUCTO
-    // --------------------------------------------------
 
     private void mostrarDetalleProducto(Producto producto) {
 
@@ -633,9 +642,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-    // --------------------------------------------------
     // VERIFICAR ACCESO DE ADMINISTRADOR
-    // --------------------------------------------------
 
     private void verificarAccesoAdmin() {
 

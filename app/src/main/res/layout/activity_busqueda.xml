@@ -333,6 +333,36 @@
 
         </LinearLayout>
 
+        <!-- Carrito -->
+        <LinearLayout
+            android:id="@+id/btnNavCarrito"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="@string/nav_cart"
+                android:src="@drawable/ic_nav_cart"
+                android:textColor="@color/munchly_nav_inactive" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="sans-serif"
+                android:text="Carrito"
+                android:textColor="@color/munchly_nav_inactive"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
         <!-- CUENTA -->
         <LinearLayout
             android:id="@+id/btnNavCuenta"

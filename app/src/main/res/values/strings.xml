@@ -31,6 +31,7 @@
     <string name="nav_home">Inicio</string>
     <string name="nav_search">Búsqueda</string>
     <string name="nav_account">Cuenta</string>
+    <string name="nav_cart">Carrito</string>
     <string name="nav_receipts">Recibos</string>
     <string name="nav_orders">Recibos</string>
     <string name="nav_profile">Cuenta</string>
