@@ -20,6 +20,7 @@ import android.widget.FrameLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.comanda.models.Producto;
+import com.example.comanda.Data.CarritoManager;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.Locale;
@@ -41,7 +42,7 @@ public class DetalleProductoActivity extends AppCompatActivity {
     private MaterialButton btnAgregar;
 
     private int cantidad = 1;
-    private double precioUnitario = 4.50;
+    private int precioUnitarioCentavos = 0;
     private boolean esFavorito = false;
     private Producto productoActual;
 
@@ -138,13 +139,16 @@ public class DetalleProductoActivity extends AppCompatActivity {
                         : "Sin descripción disponible."
         );
 
-        precioUnitario = productoActual.getPrecioCentavos() > 0
-                ? productoActual.getPrecioCentavos() / 100.0
-                : 4.50;
+        precioUnitarioCentavos = productoActual.getPrecioCentavos();
 
         tvPrecio.setText(
-                String.format(Locale.US, "$%.2f", precioUnitario)
+                String.format(Locale.US, "$%.2f", precioUnitarioCentavos / 100.0)
         );
+
+        if(precioUnitarioCentavos <= 0){
+            btnAgregar.setEnabled(false);
+            btnAgregar.setText("Precio no disponible");
+        }
 
         cargarImagenProducto(productoActual.getImagenUrl());
     }
@@ -197,33 +201,48 @@ public class DetalleProductoActivity extends AppCompatActivity {
         });
 
         btnAgregar.setOnClickListener(v -> {
-            double total = cantidad * precioUnitario;
+            if (productoActual == null){
+                Toast.makeText(
+                        this,
+                        "No se pudo identificar el producto",
+                        Toast.LENGTH_SHORT
+                ).show();
+                return;
+            }
+            String notas = etNotas.getText().toString().trim();
 
-            String mensaje = String.format(
-                    Locale.US,
-                    "Agregado %d platillo(s) al pedido ($%.2f)",
+            boolean agregado = CarritoManager.getInstance().agregarProducto(
+                    productoActual,
                     cantidad,
-                    total
+                    notas
             );
 
-            Toast.makeText(
-                    this,
-                    mensaje,
-                    Toast.LENGTH_SHORT
-            ).show();
-
-            finish();
+            if (agregado){
+                Toast.makeText(
+                        this,
+                        "Producto agregado al carrito",
+                        Toast.LENGTH_SHORT
+                ).show();
+                finish();
+            }else {
+                Toast.makeText(
+                        this,
+                        "No se pudo agregar el producto",
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
         });
     }
 
     private void actualizarBotonTotal() {
-        double total = cantidad * precioUnitario;
+        long totalCentavos = (long) cantidad * precioUnitarioCentavos;
 
         btnAgregar.setText(
                 String.format(
                         Locale.US,
                         "Agregar al pedido • $%.2f",
-                        total
+                        totalCentavos / 100.0
+
                 )
         );
     }
