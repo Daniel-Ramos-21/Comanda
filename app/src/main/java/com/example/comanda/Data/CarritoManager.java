@@ -1,7 +1,5 @@
 package com.example.comanda.Data;
 
-import androidx.credentials.webauthn.Cbor;
-
 import com.example.comanda.models.ItemCarrito;
 import com.example.comanda.models.Producto;
 
@@ -70,12 +68,13 @@ public class CarritoManager {
         return copia;
     }
 
-    public synchronized int obtenerCatidadTotal(){
+    public synchronized int obtenerCantidadTotal() {
         int cantidadTotal = 0;
 
-        for (ItemCarrito item : items){
+        for (ItemCarrito item : items) {
             cantidadTotal += item.getCantidad();
         }
+
         return cantidadTotal;
     }
 
@@ -98,6 +97,24 @@ public class CarritoManager {
 
     public synchronized boolean estaVacio(){
         return items.isEmpty();
+    }
+
+    public synchronized void actualizarCantidad(
+            int posicion,
+            int cantidad
+    ){
+        if (posicion < 0 || posicion >= items.size() || cantidad <= 0){
+            return;
+        }
+        items.get(posicion).setCantidad(cantidad);
+
+    }
+
+    public synchronized void eliminarItem(int posicion){
+        if (posicion < 0 || posicion >= items.size()){
+            return;
+        }
+        items.remove(posicion);
     }
 
 }
