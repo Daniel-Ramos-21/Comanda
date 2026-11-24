@@ -78,6 +78,11 @@
             android:name=".CarritoActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".ConfirmarPedidoActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
     </application>
 
 </manifest>

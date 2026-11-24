@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -99,6 +100,7 @@ public class CarritoActivity extends AppCompatActivity {
         btnAtras.setOnClickListener(v -> finish());
 
         btnContinuar.setOnClickListener(v -> {
+
             if (carritoManager.estaVacio()) {
                 Toast.makeText(
                         this,
@@ -108,11 +110,12 @@ public class CarritoActivity extends AppCompatActivity {
                 return;
             }
 
-            Toast.makeText(
-                    this,
-                    "Continuaremos con la confirmación del pedido en la siguiente etapa",
-                    Toast.LENGTH_LONG
-            ).show();
+            Intent intent = new Intent(
+                    CarritoActivity.this,
+                    ConfirmarPedidoActivity.class
+            );
+
+            startActivity(intent);
         });
     }
 
